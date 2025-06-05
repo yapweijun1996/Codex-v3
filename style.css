@@ -49,6 +49,7 @@ body {
   margin: 0;
   flex: 1;
   text-align: center;
+  order: 1;
 }
 
 .nav-toggle {
@@ -56,7 +57,8 @@ body {
   border: none;
   color: var(--text-color);
   font-size: 1.5rem;
-  margin-left: auto;
+  margin-left: 0.5rem;
+  order: 3;
 }
 
 .theme-toggle {
@@ -65,6 +67,13 @@ body {
   color: var(--text-color);
   font-size: 1.2rem;
   margin-left: 0.5rem;
+  order: 2;
+}
+
+@media (max-width: 600px) {
+  .nav-toggle {
+    margin-left: auto;
+  }
 }
 
 .sidebar {
