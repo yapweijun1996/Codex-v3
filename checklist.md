@@ -8,6 +8,9 @@ This checklist tracks user experience and interface tasks for the Vera-based adm
 - [ ] Use consistent spacing and margins throughout the panel
 - [x] Ensure sidebar items are clickable across the full row
 - [x] Add a visible close button to the mobile sidebar
+- [ ] Improve mobile sidebar layout so the close button does not overlap menu items
+- [ ] Disable zooming on mobile for a consistent experience
+- [ ] Smooth sidebar animation using CSS transforms
 
 ## Theming
 - [x] Default to dark mode with an optional light theme

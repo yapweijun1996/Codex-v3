@@ -56,12 +56,13 @@ body {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -100%;
+  left: 0;
+  transform: translateX(-100%);
   width: 100%;
   height: 100%;
   background: #111;
   overflow-y: auto;
-  transition: left 0.3s ease;
+  transition: transform 0.3s ease;
   z-index: 10;
 }
 
@@ -84,12 +85,12 @@ body {
 }
 
 .sidebar.open {
-  left: 0;
+  transform: translateX(0);
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
+  padding: 3rem 0 0;
 }
 
 .sidebar li {
@@ -127,10 +128,10 @@ body {
 @media (min-width: 768px) {
   .sidebar {
     width: 200px;
-    left: -250px;
+    transform: translateX(-250px);
   }
   .sidebar.open {
-    left: 0;
+    transform: translateX(0);
   }
   .sidebar.open + .main-content {
     margin-left: 200px;
