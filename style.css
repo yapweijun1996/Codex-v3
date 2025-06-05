@@ -23,6 +23,20 @@ body {
   min-height: 100vh;
 }
 
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--accent-color);
+  color: #fff;
+  padding: 0.5rem;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
 .app-header {
   display: flex;
   align-items: center;
@@ -37,7 +51,7 @@ body {
   text-align: center;
 }
 
-#nav-toggle {
+.nav-toggle {
   background: none;
   border: none;
   color: var(--text-color);
@@ -45,7 +59,7 @@ body {
   margin-left: auto;
 }
 
-#theme-toggle {
+.theme-toggle {
   background: none;
   border: none;
   color: var(--text-color);

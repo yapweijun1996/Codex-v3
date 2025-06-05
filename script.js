@@ -1,8 +1,8 @@
 (function () {
-  const toggle = document.getElementById('nav-toggle');
+  const toggle = document.querySelector('.nav-toggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
-  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggle = document.querySelector('.theme-toggle');
   const closeBtn = document.getElementById('sidebar-close');
   const firstLink = sidebar ? sidebar.querySelector('a') : null;
   let initialLoad = true;
@@ -26,14 +26,14 @@
   const updateToggle = () => {
     const isOpen = sidebar.classList.contains('open');
     if (isOpen) {
-      toggle.textContent = '✖';
+      toggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
       toggle.setAttribute('aria-label', 'Close navigation');
       toggle.setAttribute('aria-expanded', 'true');
       overlay.classList.add('visible');
       localStorage.setItem('sidebarOpen', 'true');
       if (!initialLoad && firstLink) firstLink.focus();
     } else {
-      toggle.textContent = '☰';
+      toggle.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
       toggle.setAttribute('aria-label', 'Open navigation');
       toggle.setAttribute('aria-expanded', 'false');
       overlay.classList.remove('visible');
@@ -87,13 +87,15 @@
     });
   });
 
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light');
-    localStorage.setItem(
-      'theme',
-      document.body.classList.contains('light') ? 'light' : 'dark'
-    );
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem(
+        'theme',
+        document.body.classList.contains('light') ? 'light' : 'dark'
+      );
+    });
+  }
 
   if (tableSkeleton && userTable) {
     setTimeout(() => {

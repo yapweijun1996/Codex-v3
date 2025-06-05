@@ -9,11 +9,8 @@
   <title>Settings</title>
 </head>
 <body>
-  <header class="app-header" role="banner">
-    <h1 class="app-title">Settings</h1>
-    <button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar">☰</button>
-    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-  </header>
+  <script src="header.js"></script>
+  <script>buildHeader('Settings', {themeToggle: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>

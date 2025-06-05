@@ -5,7 +5,8 @@ const ASSETS = [
   '/settings.html',
   '/reports.html',
   '/style.css',
-  '/script.js'
+  '/script.js',
+  '/header.js'
 ];
 
 self.addEventListener('install', event => {
