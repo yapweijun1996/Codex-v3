@@ -23,21 +23,23 @@
   <main id="main" class="main-content" role="main">
     <h2>Welcome</h2>
     <p>This is a minimal dark-mode admin panel skeleton.</p>
-    <div id="table-skeleton">
+    <div class="dashboard-grid">
+  <label for="user-filter" class="sr-only">Filter users</label>
+  <input id="user-filter" type="text" class="filter-input" placeholder="Filter users" />
+  <div class="table-container" aria-live="polite">
+    <div class="table-skeleton">
       <div class="skeleton-row"></div>
       <div class="skeleton-row"></div>
       <div class="skeleton-row"></div>
     </div>
-    <div class="dashboard-grid">
-      <input id="user-filter" type="text" class="filter-input" placeholder="Filter users" aria-label="Filter users" />
-      <table id="user-table" class="data-table" hidden>
-        <thead>
-          <tr>
-            <th data-sort="user" class="sortable">User</th>
-            <th data-sort="status" class="sortable">Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
+    <table id="user-table" class="data-table" hidden>
+      <thead>
+        <tr>
+          <th data-sort="user" class="sortable">User</th>
+          <th data-sort="status" class="sortable">Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
       <tbody>
         <tr>
           <td>Alice</td>
@@ -50,8 +52,9 @@
           <td><button class="btn">Edit</button></td>
         </tr>
       </tbody>
-      </table>
-    </div>
+    </table>
+  </div>
+</div>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
