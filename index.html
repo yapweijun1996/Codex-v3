@@ -9,11 +9,8 @@
   <title>Dark Admin Panel</title>
 </head>
 <body>
-  <header class="app-header" role="banner">
-    <h1 class="app-title">Admin Panel</h1>
-    <button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar">☰</button>
-    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-  </header>
+  <script src="header.js"></script>
+  <script>buildHeader('Admin Panel');</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
