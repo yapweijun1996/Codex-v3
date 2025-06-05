@@ -8,6 +8,14 @@ This checklist tracks tasks related to improvements and bug fixes.
 - [x] Fix CSS so the sidebar can close on all screen sizes
 - [x] Suggest further improvements for the admin panel
 
+## Planned Tasks
+
+- [x] Add a close icon for the sidebar toggle
+- [x] Link sidebar items to dedicated pages
+- [x] Create sample UI elements: tables, labels and buttons
+- [x] Style the new components for a cohesive admin template
+- [x] Provide placeholder pages for Settings and other sections
+
 
 ## Suggested Improvements
 
