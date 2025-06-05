@@ -5,8 +5,8 @@
     header.setAttribute('role', 'banner');
     header.innerHTML = `
       <a href="#main" class="skip-link">Skip to content</a>
-      <button class="nav-toggle" aria-label="Open navigation" aria-controls="sidebar"></button>
       <h1 class="app-title">${title}</h1>
+      <button class="nav-toggle" aria-label="Open navigation" aria-controls="sidebar"></button>
     `;
     if (opts.themeToggle) {
       const themeBtn = document.createElement('button');
