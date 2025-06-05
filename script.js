@@ -6,7 +6,7 @@
   const closeBtn = document.getElementById('sidebar-close');
   const firstLink = sidebar ? sidebar.querySelector('a') : null;
   let initialLoad = true;
-  const tableSkeleton = document.getElementById('table-skeleton');
+  const tableSkeleton = document.querySelector('.table-skeleton');
   const userTable = document.getElementById('user-table');
   const filterInput = document.getElementById('user-filter');
   const form = document.getElementById('settings-form');
@@ -97,12 +97,17 @@
     });
   }
 
+  const fetchUsers = () =>
+    new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+
   if (tableSkeleton && userTable) {
-    setTimeout(() => {
+    fetchUsers().then(() => {
       tableSkeleton.remove();
       userTable.hidden = false;
       initTable();
-    }, 1000);
+    });
   }
 
   if (form) {
