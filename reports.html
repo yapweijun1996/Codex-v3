@@ -25,6 +25,12 @@
   <div id="overlay" class="overlay"></div>
   <main id="main" class="main-content" role="main">
     <h2>Reports</h2>
+    <label for="report-range" class="sr-only">Select range</label>
+    <select id="report-range">
+      <option value="month">This month</option>
+      <option value="week">This week</option>
+      <option value="year">This year</option>
+    </select>
     <canvas id="reportChart" width="400" height="200"></canvas>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

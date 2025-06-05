@@ -31,14 +31,16 @@
       <div class="skeleton-row"></div>
       <div class="skeleton-row"></div>
     </div>
-    <table id="user-table" class="data-table" hidden>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <div class="dashboard-grid">
+      <input id="user-filter" type="text" class="filter-input" placeholder="Filter users" aria-label="Filter users" />
+      <table id="user-table" class="data-table" hidden>
+        <thead>
+          <tr>
+            <th data-sort="user" class="sortable">User</th>
+            <th data-sort="status" class="sortable">Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
       <tbody>
         <tr>
           <td>Alice</td>
@@ -51,7 +53,8 @@
           <td><button class="btn">Edit</button></td>
         </tr>
       </tbody>
-    </table>
+      </table>
+    </div>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
