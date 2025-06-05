@@ -2,6 +2,8 @@ const CACHE_NAME = 'admin-cache-v1';
 const ASSETS = [
   '/',
   '/index.html',
+  '/settings.html',
+  '/reports.html',
   '/style.css',
   '/script.js'
 ];
