@@ -1,22 +1,32 @@
-# UI/UX Improvement Checklist
+# Admin Panel UI/UX Checklist
 
-This checklist lists planned enhancements for the dark-mode admin panel. Focus areas include mobile responsiveness, dark theme consistency, and component usability.
+This checklist tracks user experience and interface tasks for the Vera-based admin panel. Each item focuses on improving usability and overall design.
 
-## Mobile Responsive Design
-- [x] Review sidebar behavior on small screens and ensure overlay closes properly
-- [x] Add smooth transition when sidebar opens/closes and main content shifts
-- [x] Expand responsive breakpoints for tablets and desktops
-- [x] Persist sidebar open state so returning users keep their preference
-- [x] Provide clear focus styles for all interactive elements
+## Layout & Navigation
+- [ ] Implement a responsive grid using Vera components
+- [x] Keep the sidebar accessible on mobile via an overlay
+- [ ] Use consistent spacing and margins throughout the panel
+- [x] Ensure sidebar items are clickable across the full row
+- [x] Add a visible close button to the mobile sidebar
 
-## Dark Mode Enhancements
-- [x] Audit color contrast against accessibility guidelines
-- [x] Use `prefers-color-scheme` to default to dark mode when possible
-- [x] Add toggle switch to allow optional light theme
+## Theming
+- [x] Default to dark mode with an optional light theme
+- [x] Provide a theme toggle that saves user preference
+- [ ] Ensure color choices meet accessibility contrast ratios
 
-## General Panel Improvements
-- [x] Mark active navigation links to orient the user
-- [x] Consolidate header and navigation markup across pages for consistency
-- [x] Add ARIA landmarks (nav, main, footer) for improved accessibility
-- [x] Include basic icons next to sidebar items for visual clarity
+## Interactivity
+- [x] Apply smooth transitions for opening/closing sidebars and dialogs
+- [x] Add ARIA attributes and proper roles for assistive technology
+- [x] Display toast messages for common actions such as saving settings
 
+## Data Presentation
+- [ ] Design data tables with sorting and filtering tools
+- [x] Show placeholder skeletons while data loads
+
+## Settings & Reports Pages
+- [x] Build settings forms using Vera inputs with validation
+- [x] Include simple charts on the reports page for quick insights
+
+## Progressive Web App
+- [ ] Audit performance and caching strategies for offline use
+- [ ] Optimize asset sizes for quicker load times

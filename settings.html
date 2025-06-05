@@ -11,10 +11,11 @@
 <body>
   <header class="app-header" role="banner">
     <h1 class="app-title">Settings</h1>
-    <button id="nav-toggle" aria-label="Open navigation">☰</button>
+    <button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar">☰</button>
     <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
   <nav id="sidebar" class="sidebar" role="navigation">
+    <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
       <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
       <li><a href="settings.html" class="active"><span class="icon">⚙️</span>Settings</a></li>
@@ -24,7 +25,16 @@
   <div id="overlay" class="overlay"></div>
   <main id="main" class="main-content" role="main">
     <h2>Settings</h2>
-    <p>This page is a placeholder for future settings configuration.</p>
+    <form id="settings-form">
+      <label>Username
+        <input type="text" name="username" required />
+      </label>
+      <label>Email
+        <input type="email" name="email" required />
+      </label>
+      <button type="submit" class="btn">Save</button>
+    </form>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>

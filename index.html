@@ -11,10 +11,11 @@
 <body>
   <header class="app-header" role="banner">
     <h1 class="app-title">Admin Panel</h1>
-    <button id="nav-toggle" aria-label="Open navigation">☰</button>
+    <button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar">☰</button>
     <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
   <nav id="sidebar" class="sidebar" role="navigation">
+    <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
       <li><a href="index.html" class="active"><span class="icon">🏠</span>Dashboard</a></li>
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
@@ -25,7 +26,12 @@
   <main id="main" class="main-content" role="main">
     <h2>Welcome</h2>
     <p>This is a minimal dark-mode admin panel skeleton.</p>
-    <table class="data-table">
+    <div id="table-skeleton">
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+      <div class="skeleton-row"></div>
+    </div>
+    <table id="user-table" class="data-table" hidden>
       <thead>
         <tr>
           <th>User</th>

@@ -96,13 +96,26 @@ body {
   padding: 1rem;
 }
 
-.icon {
-  margin-right: 0.5rem;
-}
-
 .sidebar a {
   color: var(--text-color);
   text-decoration: none;
+  display: block;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 11;
+}
+
+.icon {
+  margin-right: 0.5rem;
 }
 
 .main-content {
@@ -175,4 +188,36 @@ button:focus {
 .sidebar a.active {
   font-weight: bold;
   background: #222;
+}
+
+.skeleton-row {
+  background: #333;
+  height: 1.5rem;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.toast.show {
+  opacity: 1;
 }
