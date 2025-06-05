@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canvas Drawing Tool</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Drawing Tool</title>
+  <style>
   :root {
     --primary: #007bff;
     --primary-dark: #0056b3;
@@ -126,81 +126,91 @@
   </style>
 </head>
 <body>
-<div id="controls" class="toolbar">
-  <label for="imageLoader" class="sr-only">Upload image</label>
-  <input type="file" id="imageLoader" accept="image/*" title="Upload an image" />
-  <button id="drawMode" aria-pressed="false" aria-label="Switch to drawing mode" title="Switch to drawing mode">Draw Line</button>
-  <button id="textMode" aria-pressed="false" aria-label="Switch to text mode" title="Switch to text mode">Add Text</button>
-  <label for="lineColor" class="sr-only">Line color</label>
-  <input type="color" id="lineColor" value="#ff0000" class="hidden" title="Line color" />
-  <label for="lineWidth" class="sr-only">Line width</label>
-  <input type="number" id="lineWidth" value="2" min="1" max="10" class="hidden" title="Line width" />
-  <label for="textInput" class="sr-only">Text</label>
-  <input type="text" id="textInput" value="For Bank Use Only" class="hidden" title="Enter text" />
-  <label for="fontSelect" class="sr-only">Font family</label>
-  <select id="fontSelect" class="hidden" title="Choose font">
-    <option value="Arial" selected>Arial</option>
-    <option value="Courier New">Courier New</option>
-    <option value="Times New Roman">Times New Roman</option>
-  </select>
-  <label for="fontSize" class="sr-only">Font size</label>
-  <input type="number" id="fontSize" value="16" min="8" max="72" class="hidden" title="Font size" />
-  <button id="downloadBtn" class="hidden" aria-label="Download the edited image" title="Download the edited image">Download</button>
-  <button id="clearBtn" class="hidden" aria-label="Clear drawings and text" title="Clear drawings and text">Clear</button>
-  <button id="helpBtn" aria-label="Show instructions" title="Show instructions">Help</button>
-</div>
-<div id="instructions" class="hidden" role="dialog" aria-labelledby="helpTitle">
-  <button id="closeHelp" aria-label="Close help dialog">Close</button>
-  <h3 id="helpTitle">How to use</h3>
-  <ol>
-    <li>Upload an image.</li>
-    <li>Choose <strong>Draw Line</strong> or <strong>Add Text</strong>.</li>
-    <li>Draw on the canvas or click to place text.</li>
-    <li>Use <strong>Download</strong> to save or <strong>Clear</strong> to start over.</li>
-  </ol>
-</div>
-<div id="status" class="hidden" aria-live="polite" role="status"></div>
-<div id="previewOverlay" class="hidden" role="dialog" aria-labelledby="previewTitle">
-  <div class="box">
-    <h3 id="previewTitle">Preview</h3>
-    <img id="previewImage" alt="Preview of edited image">
-    <div>
-      <button id="confirmDownload">Download</button>
-      <button id="cancelDownload">Cancel</button>
+  <div id="controls" class="toolbar">
+    <label for="imageLoader" class="sr-only">Upload image</label>
+    <input type="file" id="imageLoader" accept="image/*" title="Upload an image">
+    <button id="drawMode" type="button" aria-pressed="false" aria-label="Switch to drawing mode" title="Switch to drawing mode">Draw Line</button>
+    <button id="textMode" type="button" aria-pressed="false" aria-label="Switch to text mode" title="Switch to text mode">Add Text</button>
+    <label for="lineColor" class="sr-only">Line color</label>
+    <input type="color" id="lineColor" value="#ff0000" class="hidden" title="Line color">
+    <label for="lineWidth" class="sr-only">Line width</label>
+    <input type="number" id="lineWidth" value="2" min="1" max="10" class="hidden" title="Line width">
+    <label for="textInput" class="sr-only">Text</label>
+    <input type="text" id="textInput" value="For Bank Use Only" class="hidden" title="Enter text">
+    <label for="fontSelect" class="sr-only">Font family</label>
+    <select id="fontSelect" class="hidden" title="Choose font">
+      <option value="Arial" selected>
+        Arial
+      </option>
+      <option value="Courier New">
+        Courier New
+      </option>
+      <option value="Times New Roman">
+        Times New Roman
+      </option>
+    </select>
+    <label for="fontSize" class="sr-only">Font size</label>
+    <input type="number" id="fontSize" value="16" min="8" max="72" class="hidden" title="Font size">
+    <button id="downloadBtn" type="button" class="hidden" aria-label="Download the edited image" title="Download the edited image">Download</button>
+    <button id="clearBtn" type="button" class="hidden" aria-label="Clear drawings and text" title="Clear drawings and text">Clear</button>
+    <button id="helpBtn" type="button" aria-label="Show instructions" title="Show instructions">Help</button>
+  </div>
+  <div id="instructions" class="hidden" role="dialog" aria-labelledby="helpTitle">
+    <button id="closeHelp" type="button" aria-label="Close help dialog">Close</button>
+    <h3 id="helpTitle">How to use</h3>
+    <ol>
+      <li>Upload an image.</li>
+      <li>Choose <strong>Draw Line</strong> or <strong>Add Text</strong>.</li>
+      <li>Draw on the canvas or click to place text.</li>
+      <li>Use <strong>Download</strong> to save or <strong>Clear</strong> to start over.</li>
+    </ol>
+  </div>
+  <div id="status" class="hidden" aria-live="polite" role="status"></div>
+  <div id="previewOverlay" class="hidden" role="dialog" aria-labelledby="previewTitle">
+    <div class="box">
+      <h3 id="previewTitle">Preview</h3><img id="previewImage" src="" alt="Preview of edited image">
+      <div>
+        <button id="confirmDownload" type="button">Download</button>
+        <button id="cancelDownload" type="button">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
-<canvas id="imageCanvas" role="img" aria-label="Image canvas"></canvas>
-<script>
-const canvas = document.getElementById('imageCanvas');
-const ctx = canvas.getContext('2d');
-let img = new Image();
-let drawing = false;
-let drawLineMode = false;
-let addTextMode = false;
-const textObjects = [];
-let activeTextIndex = null;
-let dragOffset = {x:0, y:0};
-const statusDiv = document.getElementById('status');
-const previewOverlay = document.getElementById('previewOverlay');
-const previewImage = document.getElementById('previewImage');
-const confirmDownload = document.getElementById('confirmDownload');
-const cancelDownload = document.getElementById('cancelDownload');
+  <canvas id="imageCanvas" role="img" aria-label="Image canvas"></canvas>
+  <script>
+  const canvas = document.getElementById('imageCanvas');
+  const ctx = canvas.getContext('2d');
+  let img = new Image();
+  let drawing = false;
+  let drawLineMode = false;
+  let addTextMode = false;
+  const textObjects = [];
+  let activeTextIndex = null;
+  let dragOffset = {x:0, y:0};
+  let draggingText = false;
+  const statusDiv = document.getElementById('status');
+  const previewOverlay = document.getElementById('previewOverlay');
+  const previewImage = document.getElementById('previewImage');
+  const confirmDownload = document.getElementById('confirmDownload');
+  const cancelDownload = document.getElementById('cancelDownload');
 
-function showStatus(msg){
+  window.addEventListener('DOMContentLoaded', () => {
+    previewOverlay.classList.add('hidden');
+  });
+
+  function showStatus(msg){
   statusDiv.textContent = msg;
   statusDiv.classList.remove('hidden');
   clearTimeout(showStatus._t);
   showStatus._t = setTimeout(()=>statusDiv.classList.add('hidden'), 1500);
-}
+  }
 
-const imageLoader = document.getElementById('imageLoader');
-imageLoader.addEventListener('change', handleImage, false);
+  const imageLoader = document.getElementById('imageLoader');
+  imageLoader.addEventListener('change', handleImage, false);
 
-function handleImage(e){
- const reader=new FileReader();
- reader.onload=function(event){
- img.onload=function(){
+  function handleImage(e){
+  const reader=new FileReader();
+  reader.onload=function(event){
+  img.onload=function(){
   canvas.width=img.width;
   canvas.height=img.height;
   canvas.style.width = '100%';
@@ -208,95 +218,98 @@ function handleImage(e){
   ctx.drawImage(img,0,0);
   document.getElementById('downloadBtn').classList.remove('hidden');
   document.getElementById('clearBtn').classList.remove('hidden');
- };
+  };
   img.src=event.target.result;
- };
- reader.readAsDataURL(e.target.files[0]);
-}
+  };
+  reader.readAsDataURL(e.target.files[0]);
+  }
 
-const drawBtn=document.getElementById('drawMode');
-drawBtn.addEventListener('click',()=>{
- drawLineMode=true;
- addTextMode=false;
- drawBtn.setAttribute('aria-pressed','true');
- textBtn.setAttribute('aria-pressed','false');
- document.getElementById('textInput').classList.add('hidden');
- document.getElementById('fontSelect').classList.add('hidden');
- document.getElementById('fontSize').classList.add('hidden');
- document.getElementById('lineColor').classList.remove('hidden');
- document.getElementById('lineWidth').classList.remove('hidden');
- showStatus('Draw mode');
-});
+  const drawBtn=document.getElementById('drawMode');
+  drawBtn.addEventListener('click',()=>{
+  drawLineMode=true;
+  addTextMode=false;
+  drawBtn.setAttribute('aria-pressed','true');
+  textBtn.setAttribute('aria-pressed','false');
+  document.getElementById('textInput').classList.add('hidden');
+  document.getElementById('fontSelect').classList.add('hidden');
+  document.getElementById('fontSize').classList.add('hidden');
+  document.getElementById('lineColor').classList.remove('hidden');
+  document.getElementById('lineWidth').classList.remove('hidden');
+  showStatus('Draw mode');
+  });
 
-const textBtn=document.getElementById('textMode');
-textBtn.addEventListener('click',()=>{
- addTextMode=true;
- drawLineMode=false;
- textBtn.setAttribute('aria-pressed','true');
- drawBtn.setAttribute('aria-pressed','false');
- document.getElementById('textInput').classList.remove('hidden');
- document.getElementById('fontSelect').classList.remove('hidden');
- document.getElementById('fontSize').classList.remove('hidden');
- document.getElementById('lineColor').classList.add('hidden');
- document.getElementById('lineWidth').classList.add('hidden');
- showStatus('Text mode');
-});
+  const textBtn=document.getElementById('textMode');
+  textBtn.addEventListener('click',()=>{
+  addTextMode=true;
+  drawLineMode=false;
+  textBtn.setAttribute('aria-pressed','true');
+  drawBtn.setAttribute('aria-pressed','false');
+  document.getElementById('textInput').classList.remove('hidden');
+  document.getElementById('fontSelect').classList.remove('hidden');
+  document.getElementById('fontSize').classList.remove('hidden');
+  document.getElementById('lineColor').classList.add('hidden');
+  document.getElementById('lineWidth').classList.add('hidden');
+  showStatus('Text mode');
+  });
 
-canvas.addEventListener('mousedown',e=>{
- const pos=getMousePos(e);
- if(drawLineMode){
+  canvas.addEventListener('mousedown',e=>{
+  const pos=getMousePos(e);
+  if(drawLineMode){
   drawing=true;
   ctx.beginPath();
   ctx.strokeStyle=document.getElementById('lineColor').value;
   ctx.lineWidth=parseInt(document.getElementById('lineWidth').value,10) || 2;
   ctx.moveTo(pos.x,pos.y);
- } else {
+  } else {
   activeTextIndex = getTextIndexAt(pos);
   if(activeTextIndex !== null){
     const obj=textObjects[activeTextIndex];
     dragOffset.x=pos.x-obj.x;
     dragOffset.y=pos.y-obj.y;
     canvas.style.cursor='move';
+    draggingText = false;
   }
- }
-});
+  }
+  });
 
-canvas.addEventListener('mousemove',e=>{
- const pos=getMousePos(e);
- if(drawing && drawLineMode){
+  canvas.addEventListener('mousemove',e=>{
+  const pos=getMousePos(e);
+  if(drawing && drawLineMode){
   ctx.lineTo(pos.x,pos.y);
   ctx.stroke();
- } else if(activeTextIndex!==null){
+  } else if(activeTextIndex!==null){
+  draggingText = true;
   const obj=textObjects[activeTextIndex];
   obj.x=pos.x-dragOffset.x;
   obj.y=pos.y-dragOffset.y;
   redrawCanvas();
- }
-});
+  }
+  });
 
-canvas.addEventListener('mouseup',()=>{
- if(drawing && drawLineMode){
+  canvas.addEventListener('mouseup',()=>{
+  if(drawing && drawLineMode){
   drawing=false;
- }
- if(activeTextIndex!==null){
+  }
+  if(activeTextIndex!==null){
   canvas.style.cursor='crosshair';
   activeTextIndex=null;
- }
-});
+  }
+  draggingText = false;
+  });
 
-canvas.addEventListener('click',e=>{
- if(addTextMode){
+  canvas.addEventListener('click',e=>{
+  if(addTextMode && !draggingText && activeTextIndex===null){
    const text=document.getElementById('textInput').value || 'For Bank Use Only';
    const fontFamily=document.getElementById('fontSelect').value;
    const fontSize=parseInt(document.getElementById('fontSize').value,10) || 16;
    const pos=getMousePos(e);
    textObjects.push({text,x:pos.x,y:pos.y,fontFamily,size:fontSize,font:`${fontSize}px ${fontFamily}`});
    redrawCanvas();
- }
-});
+  }
+  });
 
-document.getElementById('textInput').addEventListener('keydown',e=>{
- if(e.key==='Enter' && activeTextIndex!==null){
+  document.getElementById('textInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter' && activeTextIndex!==null){
    const obj=textObjects[activeTextIndex];
    obj.text=e.target.value;
    obj.fontFamily=document.getElementById('fontSelect').value;
@@ -310,11 +323,11 @@ document.getElementById('textInput').addEventListener('keydown',e=>{
      document.getElementById('fontSelect').classList.add('hidden');
      document.getElementById('fontSize').classList.add('hidden');
    }
- }
-});
+  }
+  });
 
-function getTextIndexAt(pos){
- for(let i=textObjects.length-1;i>=0;i--){
+  function getTextIndexAt(pos){
+  for(let i=textObjects.length-1;i>=0;i--){
   const obj=textObjects[i];
   ctx.font=obj.font;
   const metrics=ctx.measureText(obj.text);
@@ -329,59 +342,72 @@ function getTextIndexAt(pos){
      document.getElementById('fontSize').value=obj.size;
      return i;
   }
- }
- return null;
-}
+  }
+  return null;
+  }
 
-function redrawCanvas(){
- ctx.clearRect(0,0,canvas.width,canvas.height);
- ctx.drawImage(img,0,0);
- textObjects.forEach(obj=>{
+  function redrawCanvas(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0);
+  textObjects.forEach(obj=>{
    ctx.font=obj.font;
    ctx.fillText(obj.text,obj.x,obj.y);
- });
-}
+  });
+  }
 
-function getMousePos(evt){
- const rect = canvas.getBoundingClientRect();
- return {
+  function getMousePos(evt){
+  const rect = canvas.getBoundingClientRect();
+  return {
    x: (evt.clientX - rect.left) * (canvas.width / rect.width),
    y: (evt.clientY - rect.top) * (canvas.height / rect.height)
- };
-}
+  };
+  }
 
-const downloadBtn=document.getElementById('downloadBtn');
-downloadBtn.addEventListener('click',()=>{
+  const downloadBtn=document.getElementById('downloadBtn');
+  downloadBtn.addEventListener('click',e=>{
+  e.preventDefault();
   previewImage.src = canvas.toDataURL();
   previewOverlay.classList.remove('hidden');
-});
+  });
 
-confirmDownload.addEventListener('click',()=>{
+  confirmDownload.addEventListener('click',()=>{
   const link=document.createElement('a');
   link.download='edited-image.png';
   link.href=previewImage.src;
   link.click();
   previewOverlay.classList.add('hidden');
-});
+  });
 
-cancelDownload.addEventListener('click',()=>{
+  cancelDownload.addEventListener('click',()=>{
   previewOverlay.classList.add('hidden');
-});
+  });
 
-const clearBtn=document.getElementById('clearBtn');
-clearBtn.addEventListener('click',()=>{
+  previewOverlay.addEventListener('click',e=>{
+  if(e.target===previewOverlay){
+    previewOverlay.classList.add('hidden');
+  }
+  });
+
+  document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    previewOverlay.classList.add('hidden');
+  }
+  });
+
+  const clearBtn=document.getElementById('clearBtn');
+  clearBtn.addEventListener('click',()=>{
   ctx.clearRect(0,0,canvas.width,canvas.height);
   if(img.src){
    ctx.drawImage(img,0,0);
   }
   textObjects.length=0;
-});
+  });
 
-const helpBtn=document.getElementById('helpBtn');
-const instructions=document.getElementById('instructions');
-const closeHelp=document.getElementById('closeHelp');
-helpBtn.addEventListener('click',()=>instructions.classList.remove('hidden'));
-closeHelp.addEventListener('click',()=>instructions.classList.add('hidden'));
-</script>
+  const helpBtn=document.getElementById('helpBtn');
+  const instructions=document.getElementById('instructions');
+  const closeHelp=document.getElementById('closeHelp');
+  helpBtn.addEventListener('click',()=>instructions.classList.remove('hidden'));
+  closeHelp.addEventListener('click',()=>instructions.classList.add('hidden'));
+  </script>
 </body>
 </html>

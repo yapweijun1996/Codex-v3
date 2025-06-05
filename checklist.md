@@ -10,3 +10,10 @@
 - [x] Include accessibility features (labels for buttons, ARIA attributes).
 - [x] Provide a preview of the image before download and confirm action.
 - [x] Improve styling: consistent buttons, spacing, and color scheme.
+
+## Bug Fix Plan
+- [x] Fix broken HTML attributes caused by line breaks.
+- [x] Remove unwanted generator meta tag inserted during formatting.
+- [x] Add an empty `src` value to the preview image to avoid warnings.
+- [x] Prevent preview overlay from appearing automatically on page load.
+- [x] Stop text objects from duplicating when dragging existing text.
