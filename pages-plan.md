@@ -8,6 +8,9 @@ This document outlines suggested content and improvements for each page in the a
 - [x] Placeholder skeleton rows shown while data loads.
 - [x] Responsive grid layout using simple CSS grid.
 - [x] Accessible color scheme with dark and light themes.
+- [ ] Smooth sidebar animation using CSS transforms.
+- [ ] Refine mobile sidebar so close button doesn't overlap items.
+- [ ] Prevent zooming to keep layout stable on phones.
 
 ## Settings (settings.html)
 - [x] Form fields for profile details with validation.
