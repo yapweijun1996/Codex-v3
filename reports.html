@@ -11,10 +11,11 @@
 <body>
   <header class="app-header" role="banner">
     <h1 class="app-title">Reports</h1>
-    <button id="nav-toggle" aria-label="Open navigation">☰</button>
+    <button id="nav-toggle" aria-label="Open navigation" aria-controls="sidebar">☰</button>
     <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
   <nav id="sidebar" class="sidebar" role="navigation">
+    <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
       <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
@@ -24,8 +25,9 @@
   <div id="overlay" class="overlay"></div>
   <main id="main" class="main-content" role="main">
     <h2>Reports</h2>
-    <p>This page is a placeholder for future reports and analytics.</p>
+    <canvas id="reportChart" width="400" height="200"></canvas>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
 </body>
