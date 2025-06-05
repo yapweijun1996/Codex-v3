@@ -73,11 +73,11 @@ body {
 }
 
 @media (min-width: 600px) {
-  .main-content {
-    margin-left: 200px;
-  }
-  .sidebar {
+  .sidebar.open {
     left: 0;
+  }
+  .sidebar.open + .main-content {
+    margin-left: 200px;
   }
 }
 
