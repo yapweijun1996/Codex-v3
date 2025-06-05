@@ -4,6 +4,8 @@
   const overlay = document.getElementById('overlay');
   const themeToggle = document.getElementById('theme-toggle');
   const closeBtn = document.getElementById('sidebar-close');
+  const firstLink = sidebar ? sidebar.querySelector('a') : null;
+  let initialLoad = true;
   const tableSkeleton = document.getElementById('table-skeleton');
   const userTable = document.getElementById('user-table');
   const filterInput = document.getElementById('user-filter');
@@ -22,19 +24,23 @@
   };
 
   const updateToggle = () => {
-    if (sidebar.classList.contains('open')) {
+    const isOpen = sidebar.classList.contains('open');
+    if (isOpen) {
       toggle.textContent = '✖';
       toggle.setAttribute('aria-label', 'Close navigation');
       toggle.setAttribute('aria-expanded', 'true');
       overlay.classList.add('visible');
       localStorage.setItem('sidebarOpen', 'true');
+      if (!initialLoad && firstLink) firstLink.focus();
     } else {
       toggle.textContent = '☰';
       toggle.setAttribute('aria-label', 'Open navigation');
       toggle.setAttribute('aria-expanded', 'false');
       overlay.classList.remove('visible');
       localStorage.setItem('sidebarOpen', 'false');
+      if (!initialLoad) toggle.focus();
     }
+    initialLoad = false;
   };
 
   toggle.addEventListener('click', () => {

@@ -262,3 +262,12 @@ button:focus {
     align-items: start;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .overlay,
+  .main-content,
+  .toast {
+    transition: none;
+  }
+}
