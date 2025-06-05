@@ -1,25 +1,22 @@
-# Project Task Checklist
+# UI/UX Improvement Checklist
 
-This checklist tracks tasks related to improvements and bug fixes.
+This checklist lists planned enhancements for the dark-mode admin panel. Focus areas include mobile responsiveness, dark theme consistency, and component usability.
 
-## Tasks
+## Mobile Responsive Design
+- [x] Review sidebar behavior on small screens and ensure overlay closes properly
+- [x] Add smooth transition when sidebar opens/closes and main content shifts
+- [x] Expand responsive breakpoints for tablets and desktops
+- [x] Persist sidebar open state so returning users keep their preference
+- [x] Provide clear focus styles for all interactive elements
 
-- [x] Investigate why the sidebar cannot close
-- [x] Fix CSS so the sidebar can close on all screen sizes
-- [x] Suggest further improvements for the admin panel
+## Dark Mode Enhancements
+- [x] Audit color contrast against accessibility guidelines
+- [x] Use `prefers-color-scheme` to default to dark mode when possible
+- [x] Add toggle switch to allow optional light theme
 
-## Planned Tasks
-
-- [x] Add a close icon for the sidebar toggle
-- [x] Link sidebar items to dedicated pages
-- [x] Create sample UI elements: tables, labels and buttons
-- [x] Style the new components for a cohesive admin template
-- [x] Provide placeholder pages for Settings and other sections
-
-
-## Suggested Improvements
-
-- Add transition for main content shifting when sidebar toggles
-- Consider defaulting the sidebar to open on wider screens by adding the `open` class on load
-- Expand service worker caching to include additional assets
+## General Panel Improvements
+- [x] Mark active navigation links to orient the user
+- [x] Consolidate header and navigation markup across pages for consistency
+- [x] Add ARIA landmarks (nav, main, footer) for improved accessibility
+- [x] Include basic icons next to sidebar items for visual clarity
 

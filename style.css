@@ -1,7 +1,12 @@
 :root {
   --bg-color: #000;
   --text-color: #fff;
-  --accent-color: #1e90ff;
+  --accent-color: #3498db;
+}
+
+body.light {
+  --bg-color: #fff;
+  --text-color: #000;
 }
 
 * {
@@ -23,6 +28,7 @@ body {
   align-items: center;
   padding: 1rem;
   background: #111;
+  justify-content: space-between;
 }
 
 .app-title {
@@ -36,17 +42,45 @@ body {
   border: none;
   color: var(--text-color);
   font-size: 1.5rem;
+  margin-left: auto;
+}
+
+#theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px;
-  width: 200px;
+  left: -100%;
+  width: 100%;
   height: 100%;
   background: #111;
   overflow-y: auto;
   transition: left 0.3s ease;
+  z-index: 10;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .sidebar.open {
@@ -62,6 +96,10 @@ body {
   padding: 1rem;
 }
 
+.icon {
+  margin-right: 0.5rem;
+}
+
 .sidebar a {
   color: var(--text-color);
   text-decoration: none;
@@ -70,9 +108,14 @@ body {
 .main-content {
   margin-left: 0;
   padding: 1rem;
+  transition: margin-left 0.3s ease;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
+  .sidebar {
+    width: 200px;
+    left: -250px;
+  }
   .sidebar.open {
     left: 0;
   }
@@ -121,4 +164,15 @@ body {
 
 .label.danger {
   background: #c0392b;
+}
+
+a:focus,
+button:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.sidebar a.active {
+  font-weight: bold;
+  background: #222;
 }

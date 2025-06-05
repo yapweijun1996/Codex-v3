@@ -9,22 +9,24 @@
   <title>Reports</title>
 </head>
 <body>
-  <header class="app-header">
-    <button id="nav-toggle" aria-label="Open navigation">☰</button>
+  <header class="app-header" role="banner">
     <h1 class="app-title">Reports</h1>
+    <button id="nav-toggle" aria-label="Open navigation">☰</button>
+    <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
   </header>
-  <nav id="sidebar" class="sidebar">
+  <nav id="sidebar" class="sidebar" role="navigation">
     <ul>
-      <li><a href="index.html">Dashboard</a></li>
-      <li><a href="settings.html">Settings</a></li>
-      <li><a href="reports.html">Reports</a></li>
+      <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
+      <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
+      <li><a href="reports.html" class="active"><span class="icon">📊</span>Reports</a></li>
     </ul>
   </nav>
-  <main id="main" class="main-content">
+  <div id="overlay" class="overlay"></div>
+  <main id="main" class="main-content" role="main">
     <h2>Reports</h2>
     <p>This page is a placeholder for future reports and analytics.</p>
   </main>
-  <footer class="app-footer">v0.1</footer>
+  <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
 </body>
 </html>
