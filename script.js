@@ -14,6 +14,7 @@
   const tableSkeleton = document.querySelector('.table-skeleton');
   const userTable = document.getElementById('user-table');
   const filterInput = document.getElementById('user-filter');
+  const addUserBtn = document.getElementById('add-user-btn');
   const form = document.getElementById('settings-form');
   const toast = document.getElementById('toast');
   const chartCanvas = document.getElementById('reportChart');
@@ -192,7 +193,10 @@
   const initTable = () => {
     if (!userTable) return;
     const tbody = userTable.querySelector('tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));
+    let rows = Array.from(tbody.querySelectorAll('tr'));
+    const updateRows = () => {
+      rows = Array.from(tbody.querySelectorAll('tr'));
+    };
 
     const filterRows = () => {
       const term = filterInput.value.toLowerCase();
@@ -223,42 +227,97 @@
       filterInput.addEventListener('input', filterRows);
     }
 
-    tbody.querySelectorAll('.edit-user-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const row = btn.closest('tr');
-        const username = row.children[0].textContent.trim();
-        const status = row.querySelector('td:nth-child(2) .label').textContent.trim();
+    const attachRowHandlers = (row) => {
+      const editBtn = row.querySelector('.edit-user-btn');
+      if (editBtn) {
+        editBtn.addEventListener('click', () => {
+          const username = row.children[0].textContent.trim();
+          const status = row.querySelector('td:nth-child(2) .label').textContent.trim();
+          const html = `
+            <form id="edit-user-form">
+              <h3>Edit User</h3>
+              <label>Username
+                <input id="edit-username" type="text" value="${username}" required />
+              </label>
+              <label>Status
+                <select id="edit-status">
+                  <option value="Active"${status === 'Active' ? ' selected' : ''}>Active</option>
+                  <option value="Suspended"${status === 'Suspended' ? ' selected' : ''}>Suspended</option>
+                </select>
+              </label>
+              <div class="modal-actions">
+                <button type="submit" class="btn">Save</button>
+                <button type="button" class="btn" id="cancel-edit">Cancel</button>
+              </div>
+            </form>`;
+
+          openModal(html);
+
+          const form = document.getElementById('edit-user-form');
+          const cancel = document.getElementById('cancel-edit');
+
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            row.children[0].textContent = document.getElementById('edit-username').value;
+            const newStatus = document.getElementById('edit-status').value;
+            const label = row.querySelector('td:nth-child(2) .label');
+            label.textContent = newStatus;
+            label.classList.toggle('success', newStatus === 'Active');
+            label.classList.toggle('danger', newStatus !== 'Active');
+            closeModal();
+          });
+
+          cancel.addEventListener('click', () => {
+            closeModal();
+          });
+        });
+      }
+
+      const delBtn = row.querySelector('.delete-user-btn');
+      if (delBtn) {
+        delBtn.addEventListener('click', () => {
+          row.remove();
+          updateRows();
+        });
+      }
+    };
+
+    rows.forEach(attachRowHandlers);
+
+    if (addUserBtn) {
+      addUserBtn.addEventListener('click', () => {
         const html = `
-          <form id="edit-user-form">
-            <h3>Edit User</h3>
+          <form id="add-user-form">
+            <h3>Add User</h3>
             <label>Username
-              <input id="edit-username" type="text" value="${username}" required />
+              <input id="new-username" type="text" required />
             </label>
             <label>Status
-              <select id="edit-status">
-                <option value="Active"${status === 'Active' ? ' selected' : ''}>Active</option>
-                <option value="Suspended"${status === 'Suspended' ? ' selected' : ''}>Suspended</option>
+              <select id="new-status">
+                <option value="Active">Active</option>
+                <option value="Suspended">Suspended</option>
               </select>
             </label>
             <div class="modal-actions">
-              <button type="submit" class="btn">Save</button>
-              <button type="button" class="btn" id="cancel-edit">Cancel</button>
+              <button type="submit" class="btn">Add</button>
+              <button type="button" class="btn" id="cancel-add">Cancel</button>
             </div>
           </form>`;
 
         openModal(html);
 
-        const form = document.getElementById('edit-user-form');
-        const cancel = document.getElementById('cancel-edit');
+        const form = document.getElementById('add-user-form');
+        const cancel = document.getElementById('cancel-add');
 
         form.addEventListener('submit', (e) => {
           e.preventDefault();
-          row.children[0].textContent = document.getElementById('edit-username').value;
-          const newStatus = document.getElementById('edit-status').value;
-          const label = row.querySelector('td:nth-child(2) .label');
-          label.textContent = newStatus;
-          label.classList.toggle('success', newStatus === 'Active');
-          label.classList.toggle('danger', newStatus !== 'Active');
+          const username = document.getElementById('new-username').value;
+          const status = document.getElementById('new-status').value;
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${username}</td><td><span class="label ${status === 'Active' ? 'success' : 'danger'}">${status}</span></td><td><button class="btn edit-user-btn">Edit</button> <button class="btn delete-user-btn">Delete</button></td>`;
+          tbody.appendChild(tr);
+          attachRowHandlers(tr);
+          updateRows();
           closeModal();
         });
 
@@ -266,7 +325,7 @@
           closeModal();
         });
       });
-    });
+    }
   };
 
   if (chartCanvas && window.Chart) {
