@@ -7,6 +7,7 @@ const ASSETS = [
   '/reports.html',
   '/analytics.html',
   '/users.html',
+  '/logs.html',
   '/style.css',
   '/script.js',
   '/header.js'

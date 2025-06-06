@@ -14,21 +14,21 @@
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
-  <title>User Management</title>
+  <title>Logs</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('User Management', {notifications: true});</script>
+  <script>buildHeader('Logs', {notifications: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
       <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
-      <li><a href="users.html" class="active"><span class="icon">👥</span>Users</a></li>
+      <li><a href="users.html"><span class="icon">👥</span>Users</a></li>
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
       <li><a href="profile.html"><span class="icon">👤</span>Profile</a></li>
       <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
       <li><a href="analytics.html"><span class="icon">📈</span>Analytics</a></li>
-      <li><a href="logs.html"><span class="icon">📜</span>Logs</a></li>
+      <li><a href="logs.html" class="active"><span class="icon">📜</span>Logs</a></li>
     </ul>
   </nav>
   <div id="overlay" class="overlay"></div>
@@ -38,10 +38,9 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Users</h2>
-    <button id="add-user-btn" class="btn">Add User</button>
-    <label for="user-filter" class="sr-only">Filter users</label>
-    <input id="user-filter" type="text" class="filter-input" placeholder="Filter users" />
+    <h2>Audit Logs</h2>
+    <label for="user-filter" class="sr-only">Filter logs</label>
+    <input id="user-filter" type="text" class="filter-input" placeholder="Filter logs" />
     <div class="table-container" aria-live="polite">
       <div class="table-skeleton">
         <div class="skeleton-row"></div>
@@ -51,27 +50,21 @@
       <table id="user-table" class="data-table" hidden>
         <thead>
           <tr>
+            <th data-sort="time" class="sortable">Timestamp</th>
             <th data-sort="user" class="sortable">User</th>
-            <th data-sort="status" class="sortable">Status</th>
-            <th>Actions</th>
+            <th data-sort="action" class="sortable">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td>2025-01-01 10:00</td>
             <td>Alice</td>
-            <td><span class="label success">Active</span></td>
-            <td>
-              <button class="btn edit-user-btn">Edit</button>
-              <button class="btn delete-user-btn">Delete</button>
-            </td>
+            <td>Logged in</td>
           </tr>
           <tr>
+            <td>2025-01-01 10:05</td>
             <td>Bob</td>
-            <td><span class="label danger">Suspended</span></td>
-            <td>
-              <button class="btn edit-user-btn">Edit</button>
-              <button class="btn delete-user-btn">Delete</button>
-            </td>
+            <td>Updated settings</td>
           </tr>
         </tbody>
       </table>
