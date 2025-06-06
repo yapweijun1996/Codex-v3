@@ -4,6 +4,7 @@
   const overlay = document.getElementById('overlay');
   const themeToggle = document.querySelector('.theme-toggle');
   const closeBtn = document.getElementById('sidebar-close');
+  const pageLoader = document.getElementById('page-loader');
   const firstLink = sidebar ? sidebar.querySelector('a') : null;
   let initialLoad = true;
   const tableSkeleton = document.querySelector('.table-skeleton');
@@ -12,6 +13,16 @@
   const form = document.getElementById('settings-form');
   const toast = document.getElementById('toast');
   const chartCanvas = document.getElementById('reportChart');
+
+  window.showLoader = function () {
+    if (pageLoader) pageLoader.classList.add('visible');
+  };
+
+  window.hideLoader = function () {
+    if (pageLoader) pageLoader.classList.remove('visible');
+  };
+
+  hideLoader();
 
   const applyTheme = () => {
     const saved = localStorage.getItem('theme');
@@ -84,6 +95,7 @@
     link.addEventListener('click', () => {
       sidebar.classList.remove('open');
       updateToggle();
+      showLoader();
     });
   });
 
