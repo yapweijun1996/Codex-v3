@@ -15,7 +15,9 @@ const ASSETS = [
   '/help.html',
   '/style.css',
   '/script.js',
-  '/header.js'
+  '/header.js',
+  '/header.min.js',
+  'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
 self.addEventListener('install', event => {
