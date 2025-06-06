@@ -361,6 +361,60 @@
     }
   }
 
+  const visitorsCanvas = document.getElementById('visitorsChart');
+  const sourceCanvas = document.getElementById('sourceChart');
+  const startInput = document.getElementById('start-date');
+  const endInput = document.getElementById('end-date');
+  const applyBtn = document.getElementById('apply-range');
+  let visitorsChart, sourceChart;
+  if (visitorsCanvas && sourceCanvas && window.Chart) {
+    visitorsChart = new Chart(visitorsCanvas.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Visitors',
+          borderColor: '#3498db',
+          fill: false,
+          data: [5, 7, 6, 4, 3, 2, 8]
+        }]
+      },
+      options: { responsive: true }
+    });
+    sourceChart = new Chart(sourceCanvas.getContext('2d'), {
+      type: 'pie',
+      data: {
+        labels: ['Direct', 'Referral', 'Social'],
+        datasets: [{
+          backgroundColor: ['#3498db', '#9b59b6', '#e74c3c'],
+          data: [50, 30, 20]
+        }]
+      },
+      options: { responsive: true }
+    });
+  }
+
+  window.updateAnalyticsCharts = function () {
+    if (!visitorsChart || !sourceChart) return;
+    const start = startInput.value ? new Date(startInput.value) : null;
+    const end = endInput.value ? new Date(endInput.value) : null;
+    const diff = start && end ? Math.floor((end - start) / 86400000) : 0;
+    if (diff >= 30) {
+      visitorsChart.data.labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+      visitorsChart.data.datasets[0].data = [10, 12, 8, 15];
+      sourceChart.data.datasets[0].data = [40, 35, 25];
+    } else {
+      visitorsChart.data.labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      visitorsChart.data.datasets[0].data = [5, 7, 6, 4, 3, 2, 8];
+      sourceChart.data.datasets[0].data = [50, 30, 20];
+    }
+    visitorsChart.update();
+    sourceChart.update();
+  };
+
+  if (applyBtn) {
+    applyBtn.addEventListener('click', window.updateAnalyticsCharts);
+  }
   applyTheme();
 
   if ('serviceWorker' in navigator) {
