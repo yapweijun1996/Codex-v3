@@ -235,14 +235,18 @@ form > label {
   }
 
 /* Alternate row background for better readability */
-  .data-table tr:nth-child(even) {
-    background: var(--surface-alt-color);
-  }
+.data-table tr:nth-child(even) {
+  background: var(--surface-alt-color);
+}
 
 /* Highlight row on hover */
-  .data-table tr:hover {
-    background: var(--surface-color);
-  }
+.data-table tr {
+  transition: background-color 0.2s ease;
+}
+
+.data-table tr:hover {
+  background: var(--surface-color);
+}
 
 .btn {
   padding: 0.3rem 0.6rem;
@@ -250,6 +254,7 @@ form > label {
   color: var(--text-color);
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .btn:hover {
@@ -383,7 +388,10 @@ html.light .filter-input {
   .sidebar,
   .overlay,
   .main-content,
-  .toast {
+  .toast,
+  .btn,
+  .data-table tr,
+  .modal {
     transition: none;
   }
 }
@@ -429,10 +437,13 @@ html.light .filter-input {
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   z-index: 40;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .modal.visible {
   display: flex;
+  opacity: 1;
 }
 
 .modal .modal-content {
