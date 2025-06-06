@@ -32,3 +32,11 @@
 - [x] Add `aria-pressed="true/false"` to the theme toggle button for better screen reader feedback (see `header.js` lines 11‑16).
 - [x] Apply the saved theme class before the page renders to avoid flashes of incorrect colors (`applyTheme()` in `script.js`).
 - [x] Document theming decisions in `README.md` so future updates remain maintainable.
+
+## Improvement Checklist — Component: Settings Page
+- [x] Remove `user-scalable=no` from the viewport meta tag to allow pinch-zoom.
+- [x] Add `for` and `id` attributes on form labels and inputs for better accessibility.
+- [x] Mark sidebar emoji icons with `aria-hidden="true"` to avoid screen reader noise.
+- [x] Apply a responsive max-width to the form so fields scale nicely on phones.
+- [x] Defer loading of `header.min.js` and `script.js` to improve initial render time.
+- [x] Move the theme setup script into `script.js` for easier maintenance.
