@@ -438,3 +438,21 @@ html.light .filter-input {
   background: var(--surface-color);
   color: var(--text-color);
 }
+
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.calendar-table {
+  max-width: 300px;
+  margin: 1rem auto;
+}
+
+.calendar-table th,
+.calendar-table td {
+  text-align: center;
+}
