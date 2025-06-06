@@ -10,6 +10,7 @@ const ASSETS = [
   '/users.html',
   '/logs.html',
   '/messages.html',
+  '/help.html',
   '/style.css',
   '/script.js',
   '/header.js'
