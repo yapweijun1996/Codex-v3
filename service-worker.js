@@ -9,6 +9,7 @@ const ASSETS = [
   '/tasks.html',
   '/users.html',
   '/logs.html',
+  '/status.html',
   '/messages.html',
   '/help.html',
   '/style.css',
