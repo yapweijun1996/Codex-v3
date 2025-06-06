@@ -14,11 +14,11 @@
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
-  <title>Help</title>
+  <title>Status</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('Help', {notifications: true});</script>
+  <script>buildHeader('Status', {notifications: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
@@ -31,8 +31,8 @@
       <li><a href="tasks.html"><span class="icon">📝</span>Tasks</a></li>
       <li><a href="messages.html"><span class="icon">💬</span>Messages</a></li>
       <li><a href="logs.html"><span class="icon">📜</span>Logs</a></li>
-      <li><a href="status.html"><span class="icon">✅</span>Status</a></li>
-      <li><a href="help.html" class="active"><span class="icon">❓</span>Help</a></li>
+      <li><a href="status.html" class="active"><span class="icon">✅</span>Status</a></li>
+      <li><a href="help.html"><span class="icon">❓</span>Help</a></li>
     </ul>
   </nav>
   <div id="overlay" class="overlay"></div>
@@ -42,26 +42,51 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Help Center</h2>
-    <section aria-labelledby="faq-heading">
-      <h3 id="faq-heading">Frequently Asked Questions</h3>
-      <dl>
-        <dt>How do I reset my password?</dt>
-        <dd>Go to the <a href="profile.html">Profile</a> page and follow the password change form.</dd>
-        <dt>Where can I switch themes?</dt>
-        <dd>The theme toggle is located in <a href="settings.html">Settings</a>.</dd>
-      </dl>
-    </section>
-    <section aria-labelledby="contact-heading">
-      <h3 id="contact-heading">Contact Us</h3>
-      <p>If you need additional assistance reach out through one of the methods below:</p>
-      <ul>
-        <li><a href="mailto:support@example.com">support@example.com</a></li>
-        <li><a href="tel:+123456789">+1 (234) 567-89</a></li>
-      </ul>
-    </section>
+    <h2>System Status</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>API</td>
+          <td><span class="label success">Operational</span></td>
+        </tr>
+        <tr>
+          <td>Database</td>
+          <td><span class="label success">Operational</span></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><span class="label danger">Down</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <canvas id="uptimeChart" width="400" height="200"></canvas>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
+  <script>
+    const ctx = document.getElementById('uptimeChart');
+    if (ctx && window.Chart) {
+      new Chart(ctx.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+          datasets: [{
+            label: 'Uptime %',
+            borderColor: '#3498db',
+            fill: false,
+            data: [100, 99, 100, 98, 100, 99, 100]
+          }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+      });
+    }
+  </script>
 </body>
 </html>
