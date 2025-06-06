@@ -14,11 +14,11 @@
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
-  <title>Analytics</title>
+  <title>Help</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('Analytics', {notifications: true});</script>
+  <script>buildHeader('Help', {notifications: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
@@ -27,11 +27,11 @@
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
       <li><a href="profile.html"><span class="icon">👤</span>Profile</a></li>
       <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
-      <li><a href="analytics.html" class="active"><span class="icon">📈</span>Analytics</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span>Analytics</a></li>
       <li><a href="tasks.html"><span class="icon">📝</span>Tasks</a></li>
       <li><a href="messages.html"><span class="icon">💬</span>Messages</a></li>
       <li><a href="logs.html"><span class="icon">📜</span>Logs</a></li>
-      <li><a href="help.html"><span class="icon">❓</span>Help</a></li>
+      <li><a href="help.html" class="active"><span class="icon">❓</span>Help</a></li>
     </ul>
   </nav>
   <div id="overlay" class="overlay"></div>
@@ -41,16 +41,25 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Analytics</h2>
-    <div class="date-range">
-      <label>From <input type="date" id="start-date"></label>
-      <label>To <input type="date" id="end-date"></label>
-      <button id="apply-range" class="btn">Apply</button>
-    </div>
-    <canvas id="visitorsChart" width="400" height="200"></canvas>
-    <canvas id="sourceChart" width="300" height="200"></canvas>
+    <h2>Help Center</h2>
+    <section aria-labelledby="faq-heading">
+      <h3 id="faq-heading">Frequently Asked Questions</h3>
+      <dl>
+        <dt>How do I reset my password?</dt>
+        <dd>Go to the <a href="profile.html">Profile</a> page and follow the password change form.</dd>
+        <dt>Where can I switch themes?</dt>
+        <dd>The theme toggle is located in <a href="settings.html">Settings</a>.</dd>
+      </dl>
+    </section>
+    <section aria-labelledby="contact-heading">
+      <h3 id="contact-heading">Contact Us</h3>
+      <p>If you need additional assistance reach out through one of the methods below:</p>
+      <ul>
+        <li><a href="mailto:support@example.com">support@example.com</a></li>
+        <li><a href="tel:+123456789">+1 (234) 567-89</a></li>
+      </ul>
+    </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
 </body>
