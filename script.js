@@ -1,4 +1,3 @@
-(function(){const s=localStorage.getItem("theme");const p=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("light",s=="light"||(!s&&!p));})();
 (function () {
   const toggle = document.querySelector('.nav-toggle');
   const sidebar = document.getElementById('sidebar');

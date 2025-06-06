@@ -5,14 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const light = saved === 'light' || (!saved && !prefersDark);
-      if (light) document.documentElement.classList.add('light');
-    })();
-  </script>
+  <script src="theme-init.js"></script>
   <link rel="stylesheet" href="style.css" />
   <title>Analytics</title>
 </head>
