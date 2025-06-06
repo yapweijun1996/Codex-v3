@@ -8,6 +8,7 @@
   const moonIcon = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
   const closeBtn = document.getElementById('sidebar-close');
   const pageLoader = document.getElementById('page-loader');
+  const modal = document.getElementById('modal');
   const firstLink = sidebar ? sidebar.querySelector('a') : null;
   let initialLoad = true;
   const tableSkeleton = document.querySelector('.table-skeleton');
@@ -26,6 +27,61 @@
   };
 
   hideLoader();
+
+  let lastFocused;
+  const focusableSelector =
+    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+  function handleKey(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const focusable = modal.querySelectorAll(focusableSelector);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  function outsideClick(e) {
+    if (e.target === modal) closeModal();
+  }
+
+  function openModal(html) {
+    if (!modal) return;
+    lastFocused = document.activeElement;
+    modal.innerHTML = '<div class="modal-content">' + html + '</div>';
+    modal.classList.add('visible');
+    modal.setAttribute('aria-hidden', 'false');
+    const focusable = modal.querySelectorAll(focusableSelector);
+    if (focusable[0]) focusable[0].focus();
+    modal.addEventListener('click', outsideClick);
+    document.addEventListener('keydown', handleKey);
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('visible');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = '';
+    modal.removeEventListener('click', outsideClick);
+    document.removeEventListener('keydown', handleKey);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  window.openModal = openModal;
+  window.closeModal = closeModal;
 
   const applyTheme = () => {
     const saved = localStorage.getItem('theme');
