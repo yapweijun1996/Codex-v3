@@ -15,3 +15,13 @@
 - [x] Ensure the skeleton width adapts with the table on narrow screens for better responsiveness.
 - [x] Trigger skeleton removal after real data is fetched rather than a fixed `setTimeout` to improve perceived performance.
 - [x] Document the loading logic in `pages-plan.md` to assist future maintenance.
+
+## Improvement Checklist — Component: Sidebar Link Loader
+- [x] Extract loader markup into a dedicated overlay element and include it on all pages.
+- [x] Provide showLoader() and hideLoader() functions in `script.js` to keep logic centralized.
+- [x] Add `role="status"` and `aria-live="polite"` to the loader so screen readers announce loading state.
+- [x] Ensure the loader overlay covers the viewport and centers the spinner responsively on mobile and desktop.
+- [x] Fade the loader in/out to maintain consistent UX when navigating between pages.
+- [x] Keep CSS animation lightweight to minimize layout thrashing and improve performance.
+- [x] Document usage of the loader in `pages-plan.md` for maintainability.
+
