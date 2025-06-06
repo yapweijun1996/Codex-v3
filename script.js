@@ -272,6 +272,13 @@
 
     const attachRowHandlers = (row) => {
       const editBtn = row.querySelector('.edit-user-btn');
+      const delBtn = row.querySelector('.delete-user-btn');
+      const setLabels = () => {
+        const name = row.children[0].textContent.trim();
+        if (editBtn) editBtn.setAttribute('aria-label', `Edit ${name}`);
+        if (delBtn) delBtn.setAttribute('aria-label', `Delete ${name}`);
+      };
+      setLabels();
       if (editBtn) {
         editBtn.addEventListener('click', () => {
           const username = row.children[0].textContent.trim();
@@ -302,6 +309,7 @@
           form.addEventListener('submit', (e) => {
             e.preventDefault();
             row.children[0].textContent = document.getElementById('edit-username').value;
+            setLabels();
             const newStatus = document.getElementById('edit-status').value;
             const label = row.querySelector('td:nth-child(2) .label');
             label.textContent = newStatus;
@@ -316,7 +324,6 @@
         });
       }
 
-      const delBtn = row.querySelector('.delete-user-btn');
       if (delBtn) {
         delBtn.addEventListener('click', () => {
           row.remove();
@@ -357,7 +364,7 @@
           const username = document.getElementById('new-username').value;
           const status = document.getElementById('new-status').value;
           const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${username}</td><td><span class="label ${status === 'Active' ? 'success' : 'danger'}">${status}</span></td><td><button class="btn edit-user-btn">Edit</button> <button class="btn delete-user-btn">Delete</button></td>`;
+          tr.innerHTML = `<td>${username}</td><td><span class="label ${status === 'Active' ? 'success' : 'danger'}">${status}</span></td><td><button class="btn edit-user-btn" aria-label="Edit ${username}">Edit</button> <button class="btn delete-user-btn" aria-label="Delete ${username}">Delete</button></td>`;
           tbody.appendChild(tr);
           attachRowHandlers(tr);
           updateRows();
