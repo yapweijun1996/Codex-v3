@@ -25,3 +25,10 @@
 - [x] Keep CSS animation lightweight to minimize layout thrashing and improve performance.
 - [x] Document usage of the loader in `pages-plan.md` for maintainability.
 
+## Improvement Checklist — Component: Theme Responsiveness
+- [x] Replace hardcoded colors in the header, sidebar, and other sections with CSS variables so both themes stay consistent (e.g. lines 44 and 86 in `style.css`).
+- [x] Remove `user-scalable=no` from the viewport meta tag to allow pinch‑zoom on mobile (see line 5 in `index.html`).
+- [x] Use a consistent sidebar width variable to avoid the 200px/250px mismatch in the desktop breakpoint (lines 151‑160 of `style.css`).
+- [x] Add `aria-pressed="true/false"` to the theme toggle button for better screen reader feedback (see `header.js` lines 11‑16).
+- [x] Apply the saved theme class before the page renders to avoid flashes of incorrect colors (`applyTheme()` in `script.js`).
+- [x] Document theming decisions in `README.md` so future updates remain maintainable.

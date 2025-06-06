@@ -19,3 +19,7 @@ Include the script before your page content and call the function:
 ```
 
 The sidebar toggle appears on the right so it is reachable for right-handed mobile use. The header also includes a skip link for accessibility and optional theme toggle support.
+
+## Theming
+
+Core colors are defined with CSS variables so both the dark and light themes stay consistent. The selected theme is stored in `localStorage` and applied early in the document head to prevent flashes of the wrong colors. Update `:root` variables in `style.css` to customize surface and border shades across the app.
