@@ -19,6 +19,9 @@
   const profileForm = document.getElementById('profile-form');
   const toast = document.getElementById('toast');
   const chartCanvas = document.getElementById('reportChart');
+  const taskForm = document.getElementById('task-form');
+  const taskInput = document.getElementById('task-input');
+  const taskTable = document.getElementById('task-table');
 
   window.showLoader = function () {
     if (pageLoader) pageLoader.classList.add('visible');
@@ -184,6 +187,10 @@
     });
   }
 
+  if (taskTable) {
+    initTasks();
+  }
+
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -345,6 +352,60 @@
         cancel.addEventListener('click', () => {
           closeModal();
         });
+      });
+    }
+  };
+
+  const initTasks = () => {
+    if (!taskTable) return;
+    const tbody = taskTable.querySelector('tbody');
+
+    const attachHandlers = (row) => {
+      const edit = row.querySelector('.edit-task-btn');
+      if (edit) {
+        edit.addEventListener('click', () => {
+          const current = row.children[0].textContent.trim();
+          const html = `
+            <form id="edit-task-form">
+              <h3>Edit Task</h3>
+              <input id="edit-task-input" type="text" value="${current}" required />
+              <div class="modal-actions">
+                <button type="submit" class="btn">Save</button>
+                <button type="button" class="btn" id="cancel-edit-task">Cancel</button>
+              </div>
+            </form>`;
+          openModal(html);
+          const form = document.getElementById('edit-task-form');
+          const cancel = document.getElementById('cancel-edit-task');
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            row.children[0].textContent = document.getElementById('edit-task-input').value;
+            closeModal();
+          });
+          cancel.addEventListener('click', closeModal);
+        });
+      }
+
+      const del = row.querySelector('.delete-task-btn');
+      if (del) {
+        del.addEventListener('click', () => {
+          row.remove();
+        });
+      }
+    };
+
+    Array.from(tbody.querySelectorAll('tr')).forEach(attachHandlers);
+
+    if (taskForm) {
+      taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = taskInput.value.trim();
+        if (!name) return;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${name}</td><td><button class="btn edit-task-btn">Edit</button> <button class="btn delete-task-btn">Delete</button></td>`;
+        tbody.appendChild(tr);
+        attachHandlers(tr);
+        taskForm.reset();
       });
     }
   };
