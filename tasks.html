@@ -14,11 +14,11 @@
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
-  <title>Analytics</title>
+  <title>Tasks</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('Analytics', {notifications: true});</script>
+  <script>buildHeader('Tasks', {notifications: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
@@ -27,8 +27,8 @@
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
       <li><a href="profile.html"><span class="icon">👤</span>Profile</a></li>
       <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
-      <li><a href="analytics.html" class="active"><span class="icon">📈</span>Analytics</a></li>
-      <li><a href="tasks.html"><span class="icon">📝</span>Tasks</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span>Analytics</a></li>
+      <li><a href="tasks.html" class="active"><span class="icon">📝</span>Tasks</a></li>
       <li><a href="logs.html"><span class="icon">📜</span>Logs</a></li>
     </ul>
   </nav>
@@ -39,16 +39,30 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Analytics</h2>
-    <div class="date-range">
-      <label>From <input type="date" id="start-date"></label>
-      <label>To <input type="date" id="end-date"></label>
-      <button id="apply-range" class="btn">Apply</button>
-    </div>
-    <canvas id="visitorsChart" width="400" height="200"></canvas>
-    <canvas id="sourceChart" width="300" height="200"></canvas>
+    <h2>Tasks</h2>
+    <form id="task-form" class="task-form">
+      <label for="task-input" class="sr-only">New task</label>
+      <input id="task-input" type="text" placeholder="New task" required />
+      <button type="submit" class="btn">Add</button>
+    </form>
+    <table id="task-table" class="data-table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Example Task</td>
+          <td>
+            <button class="btn edit-task-btn">Edit</button>
+            <button class="btn delete-task-btn">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
 </body>
