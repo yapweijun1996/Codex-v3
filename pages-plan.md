@@ -28,12 +28,15 @@ This document outlines suggested content and improvements for each page in the a
 - [x] Reuses table sorting and filtering from the dashboard.
 - [x] Modal forms manage user details.
 
+## Analytics (analytics.html)
+- [x] Line and pie charts powered by Chart.js.
+- [x] Date range picker updates both charts on apply.
+
 ## Loader Overlay
 - The `page-loader` element shows a spinner during page transitions.
 - Call `showLoader()` before navigation and `hideLoader()` once the new page has loaded.
 
 ## Future Pages
-- **Analytics** – deeper insights with multiple charts and export options.
 - **Profile** – personal account settings and password changes.
 
 These plans build on the existing checklist and keep the overall dark theme while adding more robust features.

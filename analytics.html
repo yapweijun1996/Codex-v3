@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
   <script>
@@ -14,20 +14,20 @@
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
-  <title>Reports</title>
+  <title>Analytics</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('Reports');</script>
+  <script>buildHeader('Analytics');</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
       <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
       <li><a href="users.html"><span class="icon">👥</span>Users</a></li>
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
-      <li><a href="reports.html" class="active"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
-      <li><a href="analytics.html"><span class="icon">📈</span>Analytics</a></li>
-</ul>
+      <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
+      <li><a href="analytics.html" class="active"><span class="icon">📈</span>Analytics</a></li>
+    </ul>
   </nav>
   <div id="overlay" class="overlay"></div>
   <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-hidden="true">
@@ -36,14 +36,14 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Reports</h2>
-    <label for="report-range" class="sr-only">Select range</label>
-    <select id="report-range">
-      <option value="month">This month</option>
-      <option value="week">This week</option>
-      <option value="year">This year</option>
-    </select>
-    <canvas id="reportChart" width="400" height="200"></canvas>
+    <h2>Analytics</h2>
+    <div class="date-range">
+      <label>From <input type="date" id="start-date"></label>
+      <label>To <input type="date" id="end-date"></label>
+      <button id="apply-range" class="btn">Apply</button>
+    </div>
+    <canvas id="visitorsChart" width="400" height="200"></canvas>
+    <canvas id="sourceChart" width="300" height="200"></canvas>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
