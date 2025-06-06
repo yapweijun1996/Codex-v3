@@ -203,7 +203,8 @@
     };
 
     const sortStates = {};
-    userTable.querySelectorAll('th.sortable').forEach((th, index) => {
+    const headers = userTable.querySelectorAll('th.sortable');
+    headers.forEach((th, index) => {
       th.addEventListener('click', () => {
         const asc = !sortStates[index];
         sortStates[index] = asc;
@@ -213,6 +214,8 @@
           return asc ? at.localeCompare(bt) : bt.localeCompare(at);
         });
         tbody.append(...rows);
+        headers.forEach((h) => h.removeAttribute('aria-sort'));
+        th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
       });
     });
 
