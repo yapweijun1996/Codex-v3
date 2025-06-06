@@ -19,6 +19,15 @@ Include the script before your page content and call the function:
 ```
 
 The sidebar toggle appears on the right so it is reachable for right-handed mobile use. The header also includes a skip link for accessibility and optional theme toggle support.
+## Sidebar Component
+
+The sidebar markup is created with `buildSidebar(active)`. Include `sidebar.min.js` and call the function with the page key so the navigation highlights the current page.
+
+```html
+<script src="sidebar.min.js"></script>
+<script>buildSidebar("users");</script>
+```
+
 
 ## Theming
 
