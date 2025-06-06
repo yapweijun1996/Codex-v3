@@ -1,12 +1,12 @@
 const CACHE_NAME = 'admin-cache-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/settings.html',
-  '/reports.html',
-  '/style.css',
-  '/script.js',
-  '/header.js'
+  './',
+  './index.html',
+  './settings.html',
+  './reports.html',
+  './style.css',
+  './script.js',
+  './header.js'
 ];
 
 self.addEventListener('install', event => {
