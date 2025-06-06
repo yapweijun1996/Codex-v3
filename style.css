@@ -30,6 +30,26 @@ body {
   min-height: 100vh;
 }
 
+/* Headings share consistent spacing */
+h2 {
+  margin: 1rem 0;
+}
+
+/* Utility spacing classes */
+.mb-1 {
+  margin-bottom: 1rem;
+}
+
+/* Consistent spacing for forms */
+form {
+  margin-bottom: 1rem;
+}
+
+form > label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 .skip-link {
   position: absolute;
   left: -999px;
@@ -190,10 +210,13 @@ body {
     background: var(--surface-color);
   }
 
+.table-container {
+  margin: 1rem 0;
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
 }
 
 /* Sticky headers keep column names visible during scroll */
@@ -426,13 +449,13 @@ html.light .filter-input {
 
 #settings-form {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 1rem;
   width: 100%;
 }
 
 #profile-form {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 1rem;
   width: 100%;
 }
 
