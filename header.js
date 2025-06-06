@@ -19,6 +19,14 @@
       themeBtn.innerHTML = isLight ? sun : moon;
       header.appendChild(themeBtn);
     }
+    if (opts.notifications) {
+      const notifBtn = document.createElement('button');
+      notifBtn.className = 'notification-btn';
+      notifBtn.setAttribute('aria-label', 'View notifications');
+      const bell = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>';
+      notifBtn.innerHTML = bell + '<span id="notification-badge" class="badge"></span>';
+      header.appendChild(notifBtn);
+    }
     document.body.prepend(header);
   };
 })();

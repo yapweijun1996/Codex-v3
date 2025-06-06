@@ -14,21 +14,21 @@
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
-  <title>Dark Admin Panel</title>
+  <title>Notifications</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('Admin Panel', {notifications: true});</script>
+  <script>buildHeader('Notifications', {notifications: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
-      <li><a href="index.html" class="active"><span class="icon">🏠</span>Dashboard</a></li>
+      <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
       <li><a href="users.html"><span class="icon">👥</span>Users</a></li>
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
       <li><a href="profile.html"><span class="icon">👤</span>Profile</a></li>
       <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
       <li><a href="analytics.html"><span class="icon">📈</span>Analytics</a></li>
-</ul>
+    </ul>
   </nav>
   <div id="overlay" class="overlay"></div>
   <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-hidden="true">
@@ -37,40 +37,12 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Welcome</h2>
-    <p>This is a minimal dark-mode admin panel skeleton.</p>
-    <div class="dashboard-grid">
-  <label for="user-filter" class="sr-only">Filter users</label>
-  <input id="user-filter" type="text" class="filter-input" placeholder="Filter users" />
-  <div class="table-container" aria-live="polite">
-    <div class="table-skeleton">
-      <div class="skeleton-row"></div>
-      <div class="skeleton-row"></div>
-      <div class="skeleton-row"></div>
-    </div>
-    <table id="user-table" class="data-table" hidden>
-      <thead>
-        <tr>
-          <th data-sort="user" class="sortable">User</th>
-          <th data-sort="status" class="sortable">Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Alice</td>
-          <td><span class="label success">Active</span></td>
-          <td><button class="btn edit-user-btn">Edit</button></td>
-        </tr>
-        <tr>
-          <td>Bob</td>
-          <td><span class="label danger">Suspended</span></td>
-          <td><button class="btn edit-user-btn">Edit</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+    <h2>Notifications</h2>
+    <ul class="notifications-list">
+      <li>Server restarted successfully.</li>
+      <li>New user registered.</li>
+      <li>Backup completed.</li>
+    </ul>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>

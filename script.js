@@ -438,6 +438,26 @@
   }
   applyTheme();
 
+  const notifBadge = document.getElementById('notification-badge');
+
+  window.fetchNotifications = function () {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(['Server restarted', 'New user', 'Backup complete']);
+      }, 500);
+    });
+  };
+
+  window.updateNotificationBadge = function () {
+    if (!notifBadge) return;
+    fetchNotifications().then((list) => {
+      notifBadge.textContent = list.length;
+      notifBadge.style.display = list.length ? 'inline-block' : 'none';
+    });
+  };
+
+  updateNotificationBadge();
+
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('service-worker.js');

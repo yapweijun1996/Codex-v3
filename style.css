@@ -76,6 +76,21 @@ body {
   margin-left: 0.5rem;
   order: 2;
 }
+.notification-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  order: 3;
+  position: relative;
+}
+.notification-btn .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
 
 @media (max-width: 600px) {
   .nav-toggle {
