@@ -23,12 +23,16 @@ This document outlines suggested content and improvements for each page in the a
 - [x] Chart.js graphs summarizing visitor data.
 - [x] Options to switch between different report ranges.
 
+## Users (users.html)
+- [x] Dedicated page for adding, editing and deleting users.
+- [x] Reuses table sorting and filtering from the dashboard.
+- [x] Modal forms manage user details.
+
 ## Loader Overlay
 - The `page-loader` element shows a spinner during page transitions.
 - Call `showLoader()` before navigation and `hideLoader()` once the new page has loaded.
 
 ## Future Pages
-- **User Management** – dedicated page for adding or suspending users.
 - **Analytics** – deeper insights with multiple charts and export options.
 - **Profile** – personal account settings and password changes.
 
