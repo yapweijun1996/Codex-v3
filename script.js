@@ -27,10 +27,10 @@
   const applyTheme = () => {
     const saved = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (saved === 'light' || (!saved && !prefersDark)) {
-      document.body.classList.add('light');
-    } else {
-      document.body.classList.remove('light');
+    const light = saved === 'light' || (!saved && !prefersDark);
+    document.documentElement.classList.toggle('light', light);
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', light ? 'true' : 'false');
     }
   };
 
@@ -101,11 +101,10 @@
 
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      localStorage.setItem(
-        'theme',
-        document.body.classList.contains('light') ? 'light' : 'dark'
-      );
+      const light = !document.documentElement.classList.contains('light');
+      document.documentElement.classList.toggle('light', light);
+      themeToggle.setAttribute('aria-pressed', light ? 'true' : 'false');
+      localStorage.setItem('theme', light ? 'light' : 'dark');
     });
   }
 
