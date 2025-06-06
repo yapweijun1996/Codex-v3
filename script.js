@@ -22,6 +22,10 @@
   const taskForm = document.getElementById('task-form');
   const taskInput = document.getElementById('task-input');
   const taskTable = document.getElementById('task-table');
+  const calendarTable = document.getElementById('calendar-table');
+  const calendarMonth = document.getElementById('calendar-month');
+  const calendarPrev = document.getElementById('calendar-prev');
+  const calendarNext = document.getElementById('calendar-next');
 
   window.showLoader = function () {
     if (pageLoader) pageLoader.classList.add('visible');
@@ -189,6 +193,10 @@
 
   if (taskTable) {
     initTasks();
+  }
+
+  if (calendarTable) {
+    initCalendar();
   }
 
   if (form) {
@@ -408,6 +416,38 @@
         taskForm.reset();
       });
     }
+  };
+
+  const initCalendar = () => {
+    if (!calendarTable) return;
+    let current = new Date();
+    const tbody = calendarTable.querySelector('tbody');
+    const render = () => {
+      const year = current.getFullYear();
+      const month = current.getMonth();
+      calendarMonth.textContent = current.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+      const first = new Date(year, month, 1).getDay();
+      const days = new Date(year, month + 1, 0).getDate();
+      let html = '<tr>';
+      for (let i = 0; i < first; i++) html += '<td></td>';
+      for (let d = 1; d <= days; d++) {
+        if ((first + d - 1) % 7 === 0 && d !== 1) html += '</tr><tr>';
+        html += `<td>${d}</td>`;
+      }
+      html += '</tr>';
+      tbody.innerHTML = html;
+    };
+    if (calendarPrev)
+      calendarPrev.addEventListener('click', () => {
+        current.setMonth(current.getMonth() - 1);
+        render();
+      });
+    if (calendarNext)
+      calendarNext.addEventListener('click', () => {
+        current.setMonth(current.getMonth() + 1);
+        render();
+      });
+    render();
   };
 
   if (chartCanvas && window.Chart) {
