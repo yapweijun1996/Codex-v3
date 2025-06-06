@@ -214,12 +214,25 @@ body {
     background: var(--surface-alt-color);
   }
 
+/* Highlight row on hover */
+  .data-table tr:hover {
+    background: var(--surface-color);
+  }
+
 .btn {
   padding: 0.3rem 0.6rem;
   background: var(--accent-color);
   color: var(--text-color);
   border: none;
   cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:active {
+  opacity: 0.8;
 }
 
 /* Visible focus ring for keyboard users */
