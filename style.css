@@ -196,6 +196,12 @@ body {
   cursor: pointer;
 }
 
+/* Visible focus ring for keyboard users */
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--bg-color), 0 0 0 6px var(--accent-color);
+}
+
 .label {
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
