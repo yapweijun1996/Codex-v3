@@ -67,12 +67,19 @@
     if (e.target === modal) closeModal();
   }
 
-  function openModal(html) {
+  function openModal(html, titleId) {
     if (!modal) return;
     lastFocused = document.activeElement;
     modal.innerHTML = '<div class="modal-content">' + html + '</div>';
     modal.classList.add('visible');
     modal.setAttribute('aria-hidden', 'false');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    if (titleId) {
+      modal.setAttribute('aria-labelledby', titleId);
+    } else {
+      modal.removeAttribute('aria-labelledby');
+    }
     const focusable = modal.querySelectorAll(focusableSelector);
     if (focusable[0]) focusable[0].focus();
     modal.addEventListener('click', outsideClick);
@@ -210,12 +217,13 @@
     profileForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const html = `
+        <h3 id="profile-dialog-title">Save Changes</h3>
         <p>Save profile changes?</p>
         <div class="modal-actions">
           <button id="confirm-profile" class="btn">Yes</button>
           <button id="cancel-profile" class="btn">Cancel</button>
         </div>`;
-      openModal(html);
+      openModal(html, 'profile-dialog-title');
       const confirmBtn = document.getElementById('confirm-profile');
       const cancelBtn = document.getElementById('cancel-profile');
       confirmBtn.addEventListener('click', () => {
@@ -271,7 +279,7 @@
           const status = row.querySelector('td:nth-child(2) .label').textContent.trim();
           const html = `
             <form id="edit-user-form">
-              <h3>Edit User</h3>
+              <h3 id="edit-user-title">Edit User</h3>
               <label>Username
                 <input id="edit-username" type="text" value="${username}" required />
               </label>
@@ -287,7 +295,7 @@
               </div>
             </form>`;
 
-          openModal(html);
+          openModal(html, 'edit-user-title');
 
           const form = document.getElementById('edit-user-form');
           const cancel = document.getElementById('cancel-edit');
@@ -324,7 +332,7 @@
       addUserBtn.addEventListener('click', () => {
         const html = `
           <form id="add-user-form">
-            <h3>Add User</h3>
+            <h3 id="add-user-title">Add User</h3>
             <label>Username
               <input id="new-username" type="text" required />
             </label>
@@ -340,7 +348,7 @@
             </div>
           </form>`;
 
-        openModal(html);
+        openModal(html, 'add-user-title');
 
         const form = document.getElementById('add-user-form');
         const cancel = document.getElementById('cancel-add');
@@ -375,14 +383,14 @@
           const current = row.children[0].textContent.trim();
           const html = `
             <form id="edit-task-form">
-              <h3>Edit Task</h3>
+              <h3 id="edit-task-title">Edit Task</h3>
               <input id="edit-task-input" type="text" value="${current}" required />
               <div class="modal-actions">
                 <button type="submit" class="btn">Save</button>
                 <button type="button" class="btn" id="cancel-edit-task">Cancel</button>
               </div>
             </form>`;
-          openModal(html);
+          openModal(html, 'edit-task-title');
           const form = document.getElementById('edit-task-form');
           const cancel = document.getElementById('cancel-edit-task');
           form.addEventListener('submit', (e) => {
