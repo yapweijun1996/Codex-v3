@@ -1,4 +1,5 @@
-(function () {
+(function(){const s=localStorage.getItem("theme");const p=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("light",s=="light"||(!s&&!p));})();
+window.addEventListener('DOMContentLoaded', function () {
   const toggle = document.querySelector('.nav-toggle');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
@@ -204,4 +205,4 @@
       navigator.serviceWorker.register('service-worker.js');
     });
   }
-})();
+});

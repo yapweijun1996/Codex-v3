@@ -340,3 +340,9 @@ html.light .filter-input {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#settings-form {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}

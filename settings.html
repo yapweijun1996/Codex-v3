@@ -2,29 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const light = saved === 'light' || (!saved && !prefersDark);
-      if (light) document.documentElement.classList.add('light');
-    })();
-  </script>
   <link rel="stylesheet" href="style.css" />
   <title>Settings</title>
 </head>
 <body>
-  <script src="header.min.js"></script>
-  <script>buildHeader('Settings', {themeToggle: true});</script>
+  <script src="header.min.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      buildHeader('Settings', { themeToggle: true });
+    });
+  </script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
-      <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
-      <li><a href="settings.html" class="active"><span class="icon">⚙️</span>Settings</a></li>
-      <li><a href="reports.html"><span class="icon">📊</span>Reports</a></li>
+      <li><a href="index.html"><span class="icon" aria-hidden="true">🏠</span>Dashboard</a></li>
+      <li><a href="settings.html" class="active"><span class="icon" aria-hidden="true">⚙️</span>Settings</a></li>
+      <li><a href="reports.html"><span class="icon" aria-hidden="true">📊</span>Reports</a></li>
     </ul>
   </nav>
   <div id="overlay" class="overlay"></div>
@@ -35,17 +31,17 @@
   <main id="main" class="main-content" role="main">
     <h2>Settings</h2>
     <form id="settings-form">
-      <label>Username
-        <input type="text" name="username" required />
+      <label for="username">Username
+        <input id="username" type="text" name="username" required />
       </label>
-      <label>Email
-        <input type="email" name="email" required />
+      <label for="email">Email
+        <input id="email" type="email" name="email" required />
       </label>
       <button type="submit" class="btn">Save</button>
     </form>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
