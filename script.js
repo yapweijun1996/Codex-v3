@@ -219,6 +219,51 @@
     if (filterInput) {
       filterInput.addEventListener('input', filterRows);
     }
+
+    tbody.querySelectorAll('.edit-user-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        const username = row.children[0].textContent.trim();
+        const status = row.querySelector('td:nth-child(2) .label').textContent.trim();
+        const html = `
+          <form id="edit-user-form">
+            <h3>Edit User</h3>
+            <label>Username
+              <input id="edit-username" type="text" value="${username}" required />
+            </label>
+            <label>Status
+              <select id="edit-status">
+                <option value="Active"${status === 'Active' ? ' selected' : ''}>Active</option>
+                <option value="Suspended"${status === 'Suspended' ? ' selected' : ''}>Suspended</option>
+              </select>
+            </label>
+            <div class="modal-actions">
+              <button type="submit" class="btn">Save</button>
+              <button type="button" class="btn" id="cancel-edit">Cancel</button>
+            </div>
+          </form>`;
+
+        openModal(html);
+
+        const form = document.getElementById('edit-user-form');
+        const cancel = document.getElementById('cancel-edit');
+
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          row.children[0].textContent = document.getElementById('edit-username').value;
+          const newStatus = document.getElementById('edit-status').value;
+          const label = row.querySelector('td:nth-child(2) .label');
+          label.textContent = newStatus;
+          label.classList.toggle('success', newStatus === 'Active');
+          label.classList.toggle('danger', newStatus !== 'Active');
+          closeModal();
+        });
+
+        cancel.addEventListener('click', () => {
+          closeModal();
+        });
+      });
+    });
   };
 
   if (chartCanvas && window.Chart) {
