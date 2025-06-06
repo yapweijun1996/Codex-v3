@@ -5,20 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
-  <script>
-    (function () {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const light = saved === 'light' || (!saved && !prefersDark);
-      if (light) document.documentElement.classList.add('light');
-    })();
-  </script>
   <link rel="stylesheet" href="style.css" />
-  <title>Analytics</title>
+  <title>Messages</title>
 </head>
 <body>
   <script src="header.min.js"></script>
-  <script>buildHeader('Analytics', {notifications: true});</script>
+  <script>buildHeader('Messages', {notifications: true});</script>
   <nav id="sidebar" class="sidebar" role="navigation">
     <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
     <ul>
@@ -27,9 +19,9 @@
       <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
       <li><a href="profile.html"><span class="icon">👤</span>Profile</a></li>
       <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
-      <li><a href="analytics.html" class="active"><span class="icon">📈</span>Analytics</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span>Analytics</a></li>
       <li><a href="tasks.html"><span class="icon">📝</span>Tasks</a></li>
-      <li><a href="messages.html"><span class="icon">💬</span>Messages</a></li>
+      <li><a href="messages.html" class="active"><span class="icon">💬</span>Messages</a></li>
       <li><a href="logs.html"><span class="icon">📜</span>Logs</a></li>
     </ul>
   </nav>
@@ -40,17 +32,29 @@
   </div>
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
-    <h2>Analytics</h2>
-    <div class="date-range">
-      <label>From <input type="date" id="start-date"></label>
-      <label>To <input type="date" id="end-date"></label>
-      <button id="apply-range" class="btn">Apply</button>
-    </div>
-    <canvas id="visitorsChart" width="400" height="200"></canvas>
-    <canvas id="sourceChart" width="300" height="200"></canvas>
+    <h2>Messages</h2>
+    <ul class="notifications-list">
+      <li>Alice: Hi there!</li>
+      <li>Bob: Welcome to the chat.</li>
+    </ul>
+    <form id="message-form" class="task-form">
+      <label for="message-input" class="sr-only">New message</label>
+      <input id="message-input" type="text" placeholder="Type a message" required />
+      <button type="submit" class="btn">Send</button>
+    </form>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
   <script src="script.js"></script>
+  <script>
+    const form = document.getElementById('message-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        showToast('Message sent');
+        form.reset();
+      });
+    }
+  </script>
 </body>
 </html>
