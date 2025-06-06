@@ -38,5 +38,6 @@ This document outlines suggested content and improvements for each page in the a
 
 ## Future Pages
 - **Profile** – personal account settings and password changes.
+- **Logs** – audit trail page showing timestamp, user and action with sortable and filterable columns.
 
 These plans build on the existing checklist and keep the overall dark theme while adding more robust features.
