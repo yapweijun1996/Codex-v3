@@ -5,6 +5,7 @@ This document outlines suggested content and improvements for each page in the a
 ## Dashboard (index.html)
 - [x] Overview heading and short welcome message.
 - [x] Data table of users with sorting and filtering tools.
+- [x] Sorted column headers update `aria-sort` for accessibility.
 - [x] Placeholder skeleton rows shown while data loads.
 - [x] Loading logic removes the skeleton after data is fetched via a Promise.
 - [x] Responsive grid layout using simple CSS grid.
