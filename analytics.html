@@ -19,23 +19,8 @@
 <body>
   <script src="header.min.js"></script>
   <script>buildHeader('Analytics', {notifications: true});</script>
-  <nav id="sidebar" class="sidebar" role="navigation">
-    <button id="sidebar-close" class="close-btn" aria-label="Close navigation">✖</button>
-    <ul>
-      <li><a href="index.html"><span class="icon">🏠</span>Dashboard</a></li>
-      <li><a href="users.html"><span class="icon">👥</span>Users</a></li>
-      <li><a href="settings.html"><span class="icon">⚙️</span>Settings</a></li>
-      <li><a href="profile.html"><span class="icon">👤</span>Profile</a></li>
-      <li><a href="reports.html"><span class="icon">📊</span>Reports <span class="badge">3</span></a></li>
-      <li><a href="analytics.html" class="active"><span class="icon">📈</span>Analytics</a></li>
-      <li><a href="tasks.html"><span class="icon">📝</span>Tasks</a></li>
-      <li><a href="calendar.html"><span class="icon">📅</span>Calendar</a></li>
-      <li><a href="messages.html"><span class="icon">💬</span>Messages</a></li>
-      <li><a href="logs.html"><span class="icon">📜</span>Logs</a></li>
-      <li><a href="status.html"><span class="icon">✅</span>Status</a></li>
-      <li><a href="help.html"><span class="icon">❓</span>Help</a></li>
-    </ul>
-  </nav>
+  <script src="sidebar.min.js"></script>
+  <script>buildSidebar("analytics");</script>
   <div id="overlay" class="overlay"></div>
   <div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-hidden="true">
     <div class="spinner" aria-hidden="true"></div>
