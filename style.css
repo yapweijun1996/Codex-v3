@@ -181,11 +181,22 @@ body {
   margin-top: 1rem;
 }
 
+/* Sticky headers keep column names visible during scroll */
   .data-table th,
   .data-table td {
     padding: 0.5rem;
     border: 1px solid var(--border-color);
     text-align: left;
+  }
+
+  .data-table th {
+    position: sticky;
+    top: 0;
+  }
+
+/* Alternate row background for better readability */
+  .data-table tr:nth-child(even) {
+    background: var(--surface-alt-color);
   }
 
 .btn {
