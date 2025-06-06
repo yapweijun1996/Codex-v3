@@ -23,3 +23,7 @@ The sidebar toggle appears on the right so it is reachable for right-handed mobi
 ## Theming
 
 Core colors are defined with CSS variables so both the dark and light themes stay consistent. The selected theme is stored in `localStorage` and applied early in the document head to prevent flashes of the wrong colors. Update `:root` variables in `style.css` to customize surface and border shades across the app.
+
+### Profile Page
+
+`profile.html` contains personal account controls. The form allows uploading a new avatar and changing the password. Submitting the form triggers a modal confirmation built with `openModal` in `script.js`.

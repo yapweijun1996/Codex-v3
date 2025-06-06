@@ -16,6 +16,7 @@
   const filterInput = document.getElementById('user-filter');
   const addUserBtn = document.getElementById('add-user-btn');
   const form = document.getElementById('settings-form');
+  const profileForm = document.getElementById('profile-form');
   const toast = document.getElementById('toast');
   const chartCanvas = document.getElementById('reportChart');
 
@@ -187,6 +188,26 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       showToast('Settings saved');
+    });
+  }
+
+  if (profileForm) {
+    profileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const html = `
+        <p>Save profile changes?</p>
+        <div class="modal-actions">
+          <button id="confirm-profile" class="btn">Yes</button>
+          <button id="cancel-profile" class="btn">Cancel</button>
+        </div>`;
+      openModal(html);
+      const confirmBtn = document.getElementById('confirm-profile');
+      const cancelBtn = document.getElementById('cancel-profile');
+      confirmBtn.addEventListener('click', () => {
+        closeModal();
+        showToast('Profile updated');
+      });
+      cancelBtn.addEventListener('click', closeModal);
     });
   }
 
