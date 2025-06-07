@@ -166,6 +166,29 @@
     setTimeout(() => toast.classList.remove('show'), 2000);
   };
 
+  const debounce = (fn, delay = 300) => {
+    let id;
+    return (...args) => {
+      clearTimeout(id);
+      id = setTimeout(() => fn.apply(this, args), delay);
+    };
+  };
+
+  const filterTableRows = (rows, term, columns) => {
+    const search = term.toLowerCase();
+    rows.forEach((row) => {
+      const cells = columns
+        ? columns.map((i) => row.children[i]).filter(Boolean)
+        : Array.from(row.children);
+      const match = cells.some((c) =>
+        c.textContent.toLowerCase().includes(search)
+      );
+      row.hidden = !match;
+    });
+  };
+
+  window.filterTableRows = filterTableRows;
+
   sidebar.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       sidebar.classList.remove('open');
@@ -241,12 +264,12 @@
       rows = Array.from(tbody.querySelectorAll('tr'));
     };
 
+    const filterCols = filterInput && filterInput.dataset.columns
+      ? filterInput.dataset.columns.split(',').map(Number)
+      : null;
+
     const filterRows = () => {
-      const term = filterInput.value.toLowerCase();
-      rows.forEach((row) => {
-        const text = row.textContent.toLowerCase();
-        row.hidden = !text.includes(term);
-      });
+      filterTableRows(rows, filterInput.value, filterCols);
     };
 
     const sortStates = {};
@@ -267,7 +290,7 @@
     });
 
     if (filterInput) {
-      filterInput.addEventListener('input', filterRows);
+      filterInput.addEventListener('input', debounce(filterRows, 200));
     }
 
     const attachRowHandlers = (row) => {
