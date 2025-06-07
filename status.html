@@ -23,7 +23,7 @@
   <main id="main" class="main-content" role="main">
     <h2>System Status</h2>
     <div class="table__container">
-    <table class="table">
+    <table id="status-table" class="table">
       <thead>
         <tr>
           <th>Service</th>
@@ -31,19 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>API</td>
-          <td><span class="label success">Operational</span></td>
-        </tr>
-        <tr>
-          <td>Database</td>
-          <td><span class="label success">Operational</span></td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td><span class="label danger">Down</span></td>
-        </tr>
-      </tbody>
+        </tbody>
     </table>
     </div>
     <canvas id="uptimeChart" width="400" height="200"></canvas>
