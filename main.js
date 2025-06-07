@@ -3,6 +3,7 @@ import { debounce, filterTableRows, initPagination } from './js/table-utils.js';
 import { initReportChart, initAnalyticsCharts, updateAnalyticsCharts, initDashboardCharts, updateDashboardUserChart } from './js/charts.js';
 
 const toggle = document.querySelector('.nav-toggle');
+const sidebarContainer = document.getElementById('sidebar-container');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 const themeToggle = document.querySelector('.theme-toggle');
@@ -49,7 +50,7 @@ const applyTheme = () => {
 };
 
 const updateToggle = () => {
-  const isOpen = sidebar.classList.contains('open');
+  const isOpen = sidebarContainer.classList.contains('open');
   if (isOpen) {
     toggle.setAttribute('aria-label', 'Close navigation');
     toggle.setAttribute('aria-expanded', 'true');
@@ -67,31 +68,31 @@ const updateToggle = () => {
 };
 
 toggle.addEventListener('click', () => {
-  sidebar.classList.toggle('open');
+  sidebarContainer.classList.toggle('open');
   updateToggle();
 });
 
 if (closeBtn) {
   closeBtn.addEventListener('click', () => {
-    sidebar.classList.remove('open');
+    sidebarContainer.classList.remove('open');
     updateToggle();
   });
 }
 
 if (localStorage.getItem('sidebarOpen') === 'true') {
-  sidebar.classList.add('open');
+  sidebarContainer.classList.add('open');
 }
 updateToggle();
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-    sidebar.classList.remove('open');
+  if (e.key === 'Escape' && sidebarContainer.classList.contains('open')) {
+    sidebarContainer.classList.remove('open');
     updateToggle();
   }
 });
 
 overlay.addEventListener('click', () => {
-  sidebar.classList.remove('open');
+  sidebarContainer.classList.remove('open');
   updateToggle();
 });
 
@@ -338,7 +339,7 @@ function initCalendar() {
 
 sidebar.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
-    sidebar.classList.remove('open');
+    sidebarContainer.classList.remove('open');
     updateToggle();
     showLoader();
   });

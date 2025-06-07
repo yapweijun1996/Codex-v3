@@ -149,7 +149,7 @@ form > label {
   pointer-events: all;
 }
 
-.sidebar.open {
+#sidebar-container.open .sidebar {
   transform: translateX(0);
 }
 
@@ -201,10 +201,10 @@ form > label {
       width: var(--sidebar-width);
       transform: translateX(calc(-1 * var(--sidebar-width)));
     }
-    .sidebar.open {
+    #sidebar-container.open .sidebar {
       transform: translateX(0);
     }
-    .sidebar.open + .main-content {
+    #sidebar-container.open + .main-content {
       margin-left: var(--sidebar-width);
     }
   }

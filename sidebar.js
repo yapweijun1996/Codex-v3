@@ -18,6 +18,7 @@
     nav.id='sidebar';
     nav.className='sidebar';
     nav.setAttribute('role','navigation');
+    nav.setAttribute('aria-label','Main sidebar');
     const close=document.createElement('button');
     close.id='sidebar-close';
     close.className='close-btn';
@@ -25,16 +26,21 @@
     close.textContent='✖';
     nav.appendChild(close);
     const ul=document.createElement('ul');
+    ul.setAttribute('role','menu');
     items.forEach(it=>{
       const li=document.createElement('li');
       const a=document.createElement('a');
       a.href=it.href;
+      a.setAttribute('role','menuitem');
       a.innerHTML=`<span class="icon" aria-hidden="true">${it.icon}</span>${it.label}`;
       if(it.key===active)a.classList.add('active');
       li.appendChild(a);
       ul.appendChild(li);
     });
     nav.appendChild(ul);
-    document.body.appendChild(nav);
+    const container=document.createElement('aside');
+    container.id='sidebar-container';
+    container.appendChild(nav);
+    document.body.appendChild(container);
   };
 })();
