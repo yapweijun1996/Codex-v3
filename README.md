@@ -4,7 +4,7 @@ This repository contains a minimal dark-mode admin panel prototype with PWA supp
 
 ## Getting Started
 
-Open `index.html` in a modern browser. The service worker provides offline caching, and the layout adapts responsively from mobile to desktop.
+Open `index.html` in a modern browser. The service worker provides offline caching, and the layout adapts responsively from mobile to desktop. Pages now use the ES module `main.min.js` and `style.min.css` built from the source files.
 
 ## Header Component
 
@@ -35,4 +35,4 @@ Core colors are defined with CSS variables so both the dark and light themes sta
 
 ### Profile Page
 
-`profile.html` contains personal account controls. The form allows uploading a new avatar and changing the password. Submitting the form triggers a modal confirmation built with `openModal` in `script.js`.
+`profile.html` contains personal account controls. The form allows uploading a new avatar and changing the password. Submitting the form triggers a modal confirmation built with `openModal` in `main.min.js`.

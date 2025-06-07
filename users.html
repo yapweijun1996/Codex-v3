@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
   <script src="theme-init.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.min.css" />
   <title>User Management</title>
 </head>
 <body>
@@ -24,14 +24,14 @@
     <h2>Users</h2>
     <button id="add-user-btn" class="btn">Add User</button>
     <label for="user-filter" class="sr-only">Filter users</label>
-    <input id="user-filter" type="text" class="filter-input" placeholder="Filter users" data-columns="0,1" />
-    <div class="table-container" aria-live="polite">
-      <div class="table-skeleton">
-        <div class="skeleton-row"></div>
-        <div class="skeleton-row"></div>
-        <div class="skeleton-row"></div>
+    <input id="user-filter" type="text" class="table__filter-input" placeholder="Filter users" data-columns="0,1" />
+    <div class="table__container" aria-live="polite">
+      <div class="table__skeleton">
+        <div class="table__skeleton-row"></div>
+        <div class="table__skeleton-row"></div>
+        <div class="table__skeleton-row"></div>
       </div>
-      <table id="user-table" class="data-table" hidden>
+      <table id="user-table" class="table" hidden>
         <thead>
           <tr>
             <th data-sort="user" class="sortable">User</th>
@@ -58,10 +58,10 @@
           </tr>
         </tbody>
       </table>
-      <div class="pagination"></div>
+      <div class="table__pagination"></div>
     </div>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
-  <script src="script.js" defer></script>
+  <script type="module" src="main.min.js"></script>
 </body>
 </html>

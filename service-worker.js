@@ -13,8 +13,8 @@ const ASSETS = [
   '/status.html',
   '/messages.html',
   '/help.html',
-  '/style.css',
-  '/script.js',
+  '/style.min.css',
+  '/main.min.js',
   '/header.js',
   '/header.min.js',
   'https://cdn.jsdelivr.net/npm/chart.js'

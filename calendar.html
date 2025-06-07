@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
   <script src="theme-init.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.min.css" />
   <title>Calendar</title>
 </head>
 <body>
@@ -27,8 +27,8 @@
       <span id="calendar-month"></span>
       <button id="calendar-next" class="btn" aria-label="Next month">&gt;</button>
     </div>
-    <div class="table-container">
-    <table id="calendar-table" class="data-table calendar-table">
+    <div class="table__container">
+    <table id="calendar-table" class="table calendar-table">
       <thead>
         <tr>
           <th>Sun</th>
@@ -45,6 +45,6 @@
     </div>
   </main>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
-  <script src="script.js" defer></script>
+  <script type="module" src="main.min.js"></script>
 </body>
 </html>
