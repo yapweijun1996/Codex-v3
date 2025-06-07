@@ -76,3 +76,41 @@ export function updateAnalyticsCharts(startInput, endInput) {
   visitorsChart.update();
   sourceChart.update();
 }
+
+let dashboardUserChart;
+export function initDashboardCharts(usersCanvas, activityCanvas) {
+  if (usersCanvas && window.Chart) {
+    dashboardUserChart = new Chart(usersCanvas.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Active', 'Suspended'],
+        datasets: [{
+          backgroundColor: ['#3498db', '#e74c3c'],
+          data: [0, 0]
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+  }
+  if (activityCanvas && window.Chart) {
+    new Chart(activityCanvas.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Logins',
+          borderColor: '#9b59b6',
+          fill: false,
+          data: [3, 5, 4, 6, 3, 2, 7]
+        }]
+      },
+      options: { responsive: true }
+    });
+  }
+}
+
+export function updateDashboardUserChart(active, suspended) {
+  if (!dashboardUserChart) return;
+  dashboardUserChart.data.datasets[0].data = [active, suspended];
+  dashboardUserChart.update();
+}

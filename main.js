@@ -1,6 +1,6 @@
 import { openModal, closeModal } from './js/modal.js';
 import { debounce, filterTableRows, initPagination } from './js/table-utils.js';
-import { initReportChart, initAnalyticsCharts, updateAnalyticsCharts } from './js/charts.js';
+import { initReportChart, initAnalyticsCharts, updateAnalyticsCharts, initDashboardCharts, updateDashboardUserChart } from './js/charts.js';
 
 const toggle = document.querySelector('.nav-toggle');
 const sidebar = document.getElementById('sidebar');
@@ -25,6 +25,9 @@ const calendarTable = document.getElementById('calendar-table');
 const calendarMonth = document.getElementById('calendar-month');
 const calendarPrev = document.getElementById('calendar-prev');
 const calendarNext = document.getElementById('calendar-next');
+const userCountEl = document.getElementById('user-count');
+const usersChartCanvas = document.getElementById('usersChart');
+const activityChartCanvas = document.getElementById('activityChart');
 
 export function showLoader() { if (pageLoader) pageLoader.classList.add('visible'); }
 export function hideLoader() { if (pageLoader) pageLoader.classList.remove('visible'); }
@@ -100,6 +103,15 @@ const showToast = (msg) => {
 
 const fetchUsers = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
+function updateUserMetrics() {
+  if (!userTable || !userCountEl) return;
+  const rows = Array.from(userTable.querySelectorAll('tbody tr'));
+  const total = rows.length;
+  const active = rows.filter(r => r.querySelector('td:nth-child(2) .label')?.textContent.trim() === 'Active').length;
+  userCountEl.textContent = total;
+  updateDashboardUserChart(active, total - active);
+}
+
 function initTable() {
   if (!userTable) return;
   const tbody = userTable.querySelector('tbody');
@@ -158,6 +170,7 @@ function initTable() {
           label.textContent = newStatus;
           label.classList.toggle('success', newStatus === 'Active');
           label.classList.toggle('danger', newStatus !== 'Active');
+          updateUserMetrics();
           closeModal();
         });
         cancel.addEventListener('click', closeModal);
@@ -167,11 +180,13 @@ function initTable() {
       delBtn.addEventListener('click', () => {
         row.remove();
         updateRows();
+        updateUserMetrics();
       });
     }
   };
   rows.forEach(attachRowHandlers);
   pager.update();
+  updateUserMetrics();
   if (addUserBtn) {
     addUserBtn.addEventListener('click', () => {
       const html = `<form id="add-user-form"><h3 id="add-user-title">Add User</h3><label>Username<input id="new-username" type="text" required /></label><label>Status<select id="new-status"><option value="Active">Active</option><option value="Suspended">Suspended</option></select></label><div class="modal-actions"><button type="submit" class="btn">Add</button><button type="button" class="btn" id="cancel-add">Cancel</button></div></form>`;
@@ -187,6 +202,7 @@ function initTable() {
         tbody.appendChild(tr);
         attachRowHandlers(tr);
         updateRows();
+        updateUserMetrics();
         closeModal();
       });
       cancel.addEventListener('click', closeModal);
@@ -287,6 +303,7 @@ if (tableSkeleton && userTable) {
     tableSkeleton.remove();
     userTable.hidden = false;
     initTable();
+    updateUserMetrics();
   });
 }
 if (taskTable) initTasks();
@@ -311,6 +328,7 @@ const startInput = document.getElementById('start-date');
 const endInput = document.getElementById('end-date');
 const applyBtn = document.getElementById('apply-range');
 initAnalyticsCharts(visitorsCanvas, sourceCanvas);
+initDashboardCharts(usersChartCanvas, activityChartCanvas);
 if (applyBtn) applyBtn.addEventListener('click', () => updateAnalyticsCharts(startInput, endInput));
 applyTheme();
 
