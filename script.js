@@ -189,6 +189,43 @@
 
   window.filterTableRows = filterTableRows;
 
+  const initPagination = (table, perPage = 5) => {
+    const tbody = table.querySelector('tbody');
+    const container = table.parentElement.querySelector('.pagination');
+    if (!container) return { update() {} };
+    const prev = document.createElement('button');
+    prev.textContent = 'Prev';
+    prev.className = 'btn';
+    const info = document.createElement('span');
+    const next = document.createElement('button');
+    next.textContent = 'Next';
+    next.className = 'btn';
+    container.append(prev, info, next);
+    let page = 1;
+    const update = () => {
+      const rows = Array.from(tbody.querySelectorAll('tr')).filter(r => !r.hidden);
+      const pages = Math.max(1, Math.ceil(rows.length / perPage));
+      page = Math.min(page, pages);
+      rows.forEach((row, i) => {
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        row.style.display = i >= start && i < end ? '' : 'none';
+      });
+      info.textContent = `${page} / ${pages}`;
+      prev.disabled = page === 1;
+      next.disabled = page === pages;
+      container.style.display = pages <= 1 ? 'none' : 'flex';
+    };
+    prev.addEventListener('click', () => { if (page > 1) { page--; update(); } });
+    next.addEventListener('click', () => {
+      const rows = Array.from(tbody.querySelectorAll('tr')).filter(r => !r.hidden);
+      const pages = Math.max(1, Math.ceil(rows.length / perPage));
+      if (page < pages) { page++; update(); }
+    });
+    update();
+    return { update };
+  };
+
   sidebar.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       sidebar.classList.remove('open');
@@ -260,8 +297,10 @@
     if (!userTable) return;
     const tbody = userTable.querySelector('tbody');
     let rows = Array.from(tbody.querySelectorAll('tr'));
+    const pager = initPagination(userTable);
     const updateRows = () => {
       rows = Array.from(tbody.querySelectorAll('tr'));
+      pager.update();
     };
 
     const filterCols = filterInput && filterInput.dataset.columns
@@ -270,6 +309,7 @@
 
     const filterRows = () => {
       filterTableRows(rows, filterInput.value, filterCols);
+      pager.update();
     };
 
     const sortStates = {};
@@ -286,6 +326,7 @@
         tbody.append(...rows);
         headers.forEach((h) => h.removeAttribute('aria-sort'));
         th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+        pager.update();
       });
     });
 
@@ -356,6 +397,7 @@
     };
 
     rows.forEach(attachRowHandlers);
+    pager.update();
 
     if (addUserBtn) {
       addUserBtn.addEventListener('click', () => {
@@ -388,11 +430,11 @@
           const status = document.getElementById('new-status').value;
           const tr = document.createElement('tr');
           tr.innerHTML = `<td>${username}</td><td><span class="label ${status === 'Active' ? 'success' : 'danger'}">${status}</span></td><td><button class="btn edit-user-btn" aria-label="Edit ${username}">Edit</button> <button class="btn delete-user-btn" aria-label="Delete ${username}">Delete</button></td>`;
-          tbody.appendChild(tr);
-          attachRowHandlers(tr);
-          updateRows();
-          closeModal();
-        });
+        tbody.appendChild(tr);
+        attachRowHandlers(tr);
+        updateRows();
+        closeModal();
+      });
 
         cancel.addEventListener('click', () => {
           closeModal();
@@ -404,6 +446,7 @@
   const initTasks = () => {
     if (!taskTable) return;
     const tbody = taskTable.querySelector('tbody');
+    const pager = initPagination(taskTable);
 
     const attachHandlers = (row) => {
       const edit = row.querySelector('.edit-task-btn');
@@ -435,11 +478,13 @@
       if (del) {
         del.addEventListener('click', () => {
           row.remove();
+          pager.update();
         });
       }
     };
 
     Array.from(tbody.querySelectorAll('tr')).forEach(attachHandlers);
+    pager.update();
 
     if (taskForm) {
       taskForm.addEventListener('submit', (e) => {
@@ -450,6 +495,7 @@
         tr.innerHTML = `<td>${name}</td><td><button class="btn edit-task-btn">Edit</button> <button class="btn delete-task-btn">Delete</button></td>`;
         tbody.appendChild(tr);
         attachHandlers(tr);
+        pager.update();
         taskForm.reset();
       });
     }
