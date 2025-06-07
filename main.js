@@ -28,6 +28,7 @@ const calendarNext = document.getElementById('calendar-next');
 const userCountEl = document.getElementById('user-count');
 const usersChartCanvas = document.getElementById('usersChart');
 const activityChartCanvas = document.getElementById('activityChart');
+const statusTable = document.getElementById("status-table");
 
 export function showLoader() { if (pageLoader) pageLoader.classList.add('visible'); }
 export function hideLoader() { if (pageLoader) pageLoader.classList.remove('visible'); }
@@ -101,8 +102,63 @@ const showToast = (msg) => {
   setTimeout(() => toast.classList.remove('show'), 2000);
 };
 
-const fetchUsers = () => new Promise((resolve) => setTimeout(resolve, 1000));
+const API_BASE = "/api";
+const fetchUsers = async () => {
+  if (!userTable) return [];
+  const res = await fetch(`${API_BASE}/users`);
+  const data = await res.json();
+  const tbody = userTable.querySelector("tbody");
+  tbody.innerHTML = "";
+  data.forEach(u => {
+    const actions = addUserBtn ? `<button class="btn edit-user-btn" aria-label="Edit ${u.name}">Edit</button> <button class="btn delete-user-btn" aria-label="Delete ${u.name}">Delete</button>` : `<button class="btn edit-user-btn" aria-label="Edit ${u.name}">Edit</button>`;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${u.name}</td><td><span class="label ${u.status === 'Active' ? 'success' : 'danger'}">${u.status}</span></td><td>${actions}</td>`;
+    tbody.appendChild(tr);
+  });
+  return data;
+};
 
+const fetchLogs = async () => {
+  if (!userTable) return [];
+  const res = await fetch(`${API_BASE}/logs`);
+  const data = await res.json();
+  const tbody = userTable.querySelector('tbody');
+  tbody.innerHTML = '';
+  data.forEach(log => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${log.time}</td><td>${log.user}</td><td>${log.action}</td>`;
+    tbody.appendChild(tr);
+  });
+  return data;
+};
+
+const fetchTasks = async () => {
+  if (!taskTable) return [];
+  const res = await fetch(`${API_BASE}/tasks`);
+  const data = await res.json();
+  const tbody = taskTable.querySelector('tbody');
+  tbody.innerHTML = '';
+  data.forEach(task => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${task.name}</td><td><button class="btn edit-task-btn">Edit</button> <button class="btn delete-task-btn">Delete</button></td>`;
+    tbody.appendChild(tr);
+  });
+  return data;
+};
+
+const fetchStatus = async () => {
+  if (!statusTable) return [];
+  const res = await fetch(`${API_BASE}/status`);
+  const data = await res.json();
+  const tbody = statusTable.querySelector('tbody');
+  tbody.innerHTML = '';
+  data.forEach(svc => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${svc.service}</td><td><span class="label ${svc.status === 'Operational' ? 'success' : 'danger'}">${svc.status}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  return data;
+};
 function updateUserMetrics() {
   if (!userTable || !userCountEl) return;
   const rows = Array.from(userTable.querySelectorAll('tbody tr'));
@@ -299,16 +355,24 @@ if (themeToggle) {
 }
 
 if (tableSkeleton && userTable) {
-  fetchUsers().then(() => {
+  const path = window.location.pathname;
+  const loader = path.includes("logs") ? fetchLogs : fetchUsers;
+  loader().then(() => {
     tableSkeleton.remove();
     userTable.hidden = false;
     initTable();
-    updateUserMetrics();
+    if (!path.includes("logs")) updateUserMetrics();
   });
 }
-if (taskTable) initTasks();
+if (taskTable) {
+  fetchTasks().then(initTasks);
+} else if (document.getElementById("task-table")) {
+  initTasks();
+}
+if (statusTable) fetchStatus();
 if (calendarTable) initCalendar();
-if (form) form.addEventListener('submit', (e) => { e.preventDefault(); showToast('Settings saved'); });
+if (form) form.addEventListener("submit", (e) => { e.preventDefault(); showToast("Settings saved"); });
+
 if (profileForm) {
   profileForm.addEventListener('submit', (e) => {
     e.preventDefault();

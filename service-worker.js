@@ -1,4 +1,4 @@
-const CACHE_NAME = 'admin-cache-v1';
+const CACHE_NAME = 'admin-cache-v2';
 const ASSETS = [
   '/',
   '/index.html',
@@ -25,9 +25,22 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
 });
-
 self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = new URL(request.url);
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(
+      fetch(request)
+        .then(resp => {
+          const clone = resp.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+          return resp;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
   event.respondWith(
-    caches.match(event.request).then(resp => resp || fetch(event.request))
+    caches.match(request).then(resp => resp || fetch(request))
   );
 });
