@@ -212,41 +212,41 @@ form > label {
     background: var(--surface-color);
   }
 
-.table-container {
+.table__container {
   margin: 1rem 0;
   overflow-x: auto;
   max-width: 100%;
 }
 
-.data-table {
+.table {
   width: 100%;
   border-collapse: collapse;
 }
 
 /* Sticky headers keep column names visible during scroll */
-  .data-table th,
-  .data-table td {
+  .table th,
+  .table td {
     padding: 0.5rem;
     border: 1px solid var(--border-color);
     text-align: left;
   }
 
-  .data-table th {
+  .table th {
     position: sticky;
     top: 0;
   }
 
 /* Alternate row background for better readability */
-.data-table tr:nth-child(even) {
+.table tr:nth-child(even) {
   background: var(--surface-alt-color);
 }
 
 /* Highlight row on hover */
-.data-table tr {
+.table tr {
   transition: background-color 0.2s ease;
 }
 
-.data-table tr:hover {
+.table tr:hover {
   background: var(--surface-color);
 }
 
@@ -310,7 +310,7 @@ button:focus {
     background: var(--surface-alt-color);
   }
 
-  .skeleton-row {
+  .table__skeleton-row {
     background: var(--border-color);
     height: 1.5rem;
     border-radius: 3px;
@@ -318,7 +318,7 @@ button:focus {
     animation: pulse 1.5s ease-in-out infinite;
   }
 
-.table-skeleton {
+.table__skeleton {
   width: 100%;
 }
 
@@ -345,7 +345,7 @@ button:focus {
 .toast.show {
   opacity: 1;
 }
-.filter-input {
+.table__filter-input {
   margin: 1rem 0;
   padding: 0.5rem;
   width: 100%;
@@ -355,7 +355,7 @@ button:focus {
   color: var(--text-color);
 }
 
-html.light .filter-input {
+html.light .table__filter-input {
   background: var(--surface-color);
   color: var(--text-color);
 }
@@ -509,7 +509,7 @@ html.light .filter-input {
 }
 
 /* Pagination controls for tables */
-.pagination {
+.table__pagination {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -517,6 +517,6 @@ html.light .filter-input {
   margin-top: 0.5rem;
 }
 
-.pagination button {
+.table__pagination button {
   padding: 0.3rem 0.6rem;
 }

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#000" />
   <link rel="manifest" href="manifest.json" />
   <script src="theme-init.js"></script>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.min.css" />
   <title>Status</title>
 </head>
 <body>
@@ -22,8 +22,8 @@
   <div id="modal" class="modal" aria-hidden="true"></div>
   <main id="main" class="main-content" role="main">
     <h2>System Status</h2>
-    <div class="table-container">
-    <table class="data-table">
+    <div class="table__container">
+    <table class="table">
       <thead>
         <tr>
           <th>Service</th>
@@ -50,7 +50,7 @@
   </main>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <footer class="app-footer" role="contentinfo">v0.1</footer>
-  <script src="script.js" defer></script>
+  <script type="module" src="main.min.js"></script>
   <script>
     const ctx = document.getElementById('uptimeChart');
     if (ctx && window.Chart) {
