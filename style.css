@@ -507,3 +507,16 @@ html.light .filter-input {
 .calendar-table td {
   text-align: center;
 }
+
+/* Pagination controls for tables */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pagination button {
+  padding: 0.3rem 0.6rem;
+}
