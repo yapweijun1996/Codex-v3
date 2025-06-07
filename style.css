@@ -168,6 +168,10 @@ form > label {
   display: block;
 }
 
+.sidebar a:hover {
+  background: var(--surface-alt-color);
+}
+
 .close-btn {
   background: none;
   border: none;
