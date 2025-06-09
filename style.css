@@ -153,9 +153,16 @@ form > label {
   transform: translateX(0);
 }
 
-.sidebar ul {
+.sidebar-groups {
   list-style: none;
   padding: 3rem 0 0;
+  margin: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar li {
@@ -188,6 +195,35 @@ form > label {
   display: inline-flex;
   align-items: center;
   margin-right: 0.5rem;
+}
+
+.sidebar-group-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+.sidebar-group-toggle::after {
+  content: '▾';
+  float: right;
+}
+
+.sidebar-group.collapsed .sidebar-group-toggle::after {
+  content: '▸';
+}
+
+.sidebar-group.collapsed ul {
+  display: none;
+}
+
+.sidebar-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .main-content {
