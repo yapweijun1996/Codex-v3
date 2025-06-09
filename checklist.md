@@ -18,7 +18,7 @@
 
 ## Improvement Checklist — Component: Sidebar Link Loader
 - [x] Extract loader markup into a dedicated overlay element and include it on all pages.
-- [x] Provide showLoader() and hideLoader() functions in `script.js` to keep logic centralized.
+- [x] Provide showLoader() and hideLoader() functions in `main.js` to keep logic centralized.
 - [x] Add `role="status"` and `aria-live="polite"` to the loader so screen readers announce loading state.
 - [x] Ensure the loader overlay covers the viewport and centers the spinner responsively on mobile and desktop.
 - [x] Fade the loader in/out to maintain consistent UX when navigating between pages.
@@ -30,7 +30,7 @@
 - [x] Remove `user-scalable=no` from the viewport meta tag to allow pinch‑zoom on mobile (see line 5 in `index.html`).
 - [x] Use a consistent sidebar width variable to avoid the 200px/250px mismatch in the desktop breakpoint (lines 151‑160 of `style.css`).
 - [x] Add `aria-pressed="true/false"` to the theme toggle button for better screen reader feedback (see `header.js` lines 11‑16).
-- [x] Apply the saved theme class before the page renders to avoid flashes of incorrect colors (`applyTheme()` in `script.js`).
+- [x] Apply the saved theme class before the page renders to avoid flashes of incorrect colors (`applyTheme()` in `main.js`).
 - [x] Document theming decisions in `README.md` so future updates remain maintainable.
 
 ## Improvement Checklist — Component: Settings Page
@@ -38,5 +38,5 @@
 - [x] Add `for` and `id` attributes on form labels and inputs for better accessibility.
 - [x] Mark sidebar emoji icons with `aria-hidden="true"` to avoid screen reader noise.
 - [x] Apply a responsive max-width to the form so fields scale nicely on phones.
-- [x] Defer loading of `header.min.js` and `script.js` to improve initial render time.
-- [x] Move the theme setup script into `script.js` for easier maintenance.
+- [x] Defer loading of `header.min.js` and `main.min.js` to improve initial render time.
+- [x] Move the theme setup script into `main.js` for easier maintenance.
