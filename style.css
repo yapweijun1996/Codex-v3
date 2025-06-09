@@ -6,6 +6,7 @@
   --surface-alt-color: #222;
   --border-color: #333;
   --sidebar-width: 200px;
+  --sidebar-bg: var(--surface-color);
 }
 
 html.light {
@@ -125,7 +126,7 @@ form > label {
     transform: translateX(-100%);
     width: 100%;
     height: 100%;
-    background: var(--surface-color);
+    background: var(--sidebar-bg);
     overflow-y: auto;
     transition: transform 0.3s ease;
     z-index: 10;
