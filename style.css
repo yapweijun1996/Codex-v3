@@ -205,7 +205,7 @@ form > label {
     #sidebar-container.open .sidebar {
       transform: translateX(0);
     }
-    #sidebar-container.open + .main-content {
+    #sidebar-container.open ~ .main-content {
       margin-left: var(--sidebar-width);
     }
   }
