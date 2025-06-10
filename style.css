@@ -103,7 +103,7 @@ form > label {
   color: var(--text-color);
   font-size: 1.2rem;
   margin-left: 0.5rem;
-  order: 3;
+  order: 2;
   position: relative;
 }
 .notification-btn .badge {
