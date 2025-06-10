@@ -355,6 +355,14 @@ if (themeToggle) {
   });
 }
 
+const notifBtn = document.querySelector('.notification-btn');
+if (notifBtn) {
+  notifBtn.addEventListener('click', () => {
+    showLoader();
+    window.location.href = 'notifications.html';
+  });
+}
+
 if (tableSkeleton && userTable) {
   const path = window.location.pathname;
   const loader = path.includes("logs") ? fetchLogs : fetchUsers;
