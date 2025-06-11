@@ -1,0 +1,5 @@
+[
+  {"service": "API", "status": "Operational"},
+  {"service": "Database", "status": "Maintenance"},
+  {"service": "Website", "status": "Operational"}
+]
