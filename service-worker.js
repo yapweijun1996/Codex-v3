@@ -1,4 +1,4 @@
-const CACHE_NAME = 'admin-cache-v3';
+const CACHE_NAME = 'admin-cache-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -19,6 +19,10 @@ const ASSETS = [
   './header.min.js',
   './sidebar.min.js',
   'https://cdn.jsdelivr.net/npm/chart.js'
+  , './api/users.json'
+  , './api/logs.json'
+  , './api/tasks.json'
+  , './api/status.json'
 ];
 
 self.addEventListener('install', event => {
@@ -30,14 +34,16 @@ self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
   if (url.pathname.startsWith('/api/')) {
+    // Map /api/resource -> /api/resource.json stored in cache
+    if (!url.pathname.endsWith('.json')) {
+      const jsonUrl = `${url.origin}${url.pathname}.json`;
+      event.respondWith(
+        caches.match(jsonUrl).then(resp => resp || fetch(jsonUrl))
+      );
+      return;
+    }
     event.respondWith(
-      fetch(request)
-        .then(resp => {
-          const clone = resp.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
-          return resp;
-        })
-        .catch(() => caches.match(request))
+      caches.match(request).then(resp => resp || fetch(request))
     );
     return;
   }
