@@ -105,7 +105,7 @@ const showToast = (msg) => {
   setTimeout(() => toast.classList.remove('show'), 2000);
 };
 
-const API_BASE = "/api";
+const API_BASE = "./api";
 const fetchUsers = async () => {
   if (!userTable) return [];
   try {
