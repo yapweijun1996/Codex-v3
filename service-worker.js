@@ -35,17 +35,13 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
-  if (url.pathname.startsWith('/api/')) {
-    // Map /api/resource -> /api/resource.json stored in cache
-    if (!url.pathname.endsWith('.json')) {
-      const jsonUrl = `${url.origin}${url.pathname}.json`;
-      event.respondWith(
-        caches.match(jsonUrl).then(resp => resp || fetch(jsonUrl))
-      );
-      return;
-    }
+  if (url.pathname.includes('/api/')) {
+    const jsonPath = url.pathname.endsWith('.json')
+      ? url.pathname
+      : `${url.pathname}.json`;
+    const jsonUrl = `${url.origin}${jsonPath}`;
     event.respondWith(
-      caches.match(request).then(resp => resp || fetch(request))
+      caches.match(jsonUrl).then(resp => resp || fetch(jsonUrl))
     );
     return;
   }
