@@ -1,4 +1,4 @@
-const CACHE_NAME = 'admin-cache-v4';
+const CACHE_NAME = 'admin-cache-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -23,6 +23,8 @@ const ASSETS = [
   , './api/logs.json'
   , './api/tasks.json'
   , './api/status.json'
+  , './api/events.json'
+  , './api/notifications.json'
 ];
 
 self.addEventListener('install', event => {

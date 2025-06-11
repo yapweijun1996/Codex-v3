@@ -512,6 +512,13 @@ html.light .table__filter-input {
 .calendar-table td {
   text-align: center;
 }
+.calendar-table td.event-day {
+  background: var(--surface-alt-color);
+  cursor: pointer;
+}
+.calendar-table td.event-day:hover {
+  background: var(--accent-color);
+}
 
 /* Pagination controls for tables */
 .table__pagination {
