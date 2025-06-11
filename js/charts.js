@@ -86,7 +86,7 @@ export function initDashboardCharts(usersCanvas, activityCanvas) {
         labels: ['Active', 'Suspended'],
         datasets: [{
           backgroundColor: ['#3498db', '#e74c3c'],
-          data: [0, 0]
+          data: [8, 2]
         }]
       },
       options: { responsive: true, plugins: { legend: { display: false } } }
