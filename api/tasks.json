@@ -1,5 +1,14 @@
 [
   {"name": "Finish report"},
   {"name": "Submit timesheet"},
-  {"name": "Fix bug"}
+  {"name": "Fix bug"},
+  {"name": "Review pull request"},
+  {"name": "Update documentation"},
+  {"name": "Plan sprint"},
+  {"name": "Refactor code"},
+  {"name": "Meet with team"},
+  {"name": "Deploy update"},
+  {"name": "Test new feature"},
+  {"name": "Resolve ticket"},
+  {"name": "Backup database"}
 ]
