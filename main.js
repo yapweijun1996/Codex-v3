@@ -359,7 +359,18 @@ const notifBtn = document.querySelector('.notification-btn');
 if (notifBtn) {
   notifBtn.addEventListener('click', () => {
     showLoader();
-    window.location.href = 'notifications.html';
+    fetchNotifications().then((list) => {
+      hideLoader();
+      let html =
+        '<h3 id="notifications-title">Notifications</h3>' +
+        '<ul class="notifications-list">' +
+        list.map((n) => `<li>${n}</li>`).join('') +
+        '</ul><div class="modal-actions"><button id="close-notifications" class="btn">Close</button></div>';
+      openModal(html, 'notifications-title');
+      document
+        .getElementById('close-notifications')
+        .addEventListener('click', closeModal);
+    });
   });
 }
 
