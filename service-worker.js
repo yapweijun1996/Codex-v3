@@ -1,4 +1,4 @@
-const CACHE_NAME = 'admin-cache-v2';
+const CACHE_NAME = 'admin-cache-v3';
 const ASSETS = [
   '/',
   '/index.html',
@@ -17,6 +17,7 @@ const ASSETS = [
   '/main.min.js',
   '/header.js',
   '/header.min.js',
+  '/sidebar.min.js',
   'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
