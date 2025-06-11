@@ -106,59 +106,99 @@ const showToast = (msg) => {
 const API_BASE = "/api";
 const fetchUsers = async () => {
   if (!userTable) return [];
-  const res = await fetch(`${API_BASE}/users`);
-  const data = await res.json();
-  const tbody = userTable.querySelector("tbody");
-  tbody.innerHTML = "";
-  data.forEach(u => {
-    const actions = addUserBtn ? `<button class="btn edit-user-btn" aria-label="Edit ${u.name}">Edit</button> <button class="btn delete-user-btn" aria-label="Delete ${u.name}">Delete</button>` : `<button class="btn edit-user-btn" aria-label="Edit ${u.name}">Edit</button>`;
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${u.name}</td><td><span class="label ${u.status === 'Active' ? 'success' : 'danger'}">${u.status}</span></td><td>${actions}</td>`;
-    tbody.appendChild(tr);
-  });
-  return data;
+  try {
+    const res = await fetch(`${API_BASE}/users`);
+    if (!res.ok) {
+      showToast ? showToast('Failed to fetch users') : console.error('Failed to fetch users');
+      return [];
+    }
+    const data = await res.json();
+    const tbody = userTable.querySelector("tbody");
+    tbody.innerHTML = "";
+    data.forEach(u => {
+      const actions = addUserBtn ? `<button class="btn edit-user-btn" aria-label="Edit ${u.name}">Edit</button> <button class="btn delete-user-btn" aria-label="Delete ${u.name}">Delete</button>` : `<button class="btn edit-user-btn" aria-label="Edit ${u.name}">Edit</button>`;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${u.name}</td><td><span class="label ${u.status === 'Active' ? 'success' : 'danger'}">${u.status}</span></td><td>${actions}</td>`;
+      tbody.appendChild(tr);
+    });
+    return data;
+  } catch (err) {
+    console.error('Failed to fetch users', err);
+    showToast && showToast('Failed to fetch users');
+    return [];
+  }
 };
 
 const fetchLogs = async () => {
   if (!userTable) return [];
-  const res = await fetch(`${API_BASE}/logs`);
-  const data = await res.json();
-  const tbody = userTable.querySelector('tbody');
-  tbody.innerHTML = '';
-  data.forEach(log => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${log.time}</td><td>${log.user}</td><td>${log.action}</td>`;
-    tbody.appendChild(tr);
-  });
-  return data;
+  try {
+    const res = await fetch(`${API_BASE}/logs`);
+    if (!res.ok) {
+      showToast ? showToast('Failed to fetch logs') : console.error('Failed to fetch logs');
+      return [];
+    }
+    const data = await res.json();
+    const tbody = userTable.querySelector('tbody');
+    tbody.innerHTML = '';
+    data.forEach(log => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${log.time}</td><td>${log.user}</td><td>${log.action}</td>`;
+      tbody.appendChild(tr);
+    });
+    return data;
+  } catch (err) {
+    console.error('Failed to fetch logs', err);
+    showToast && showToast('Failed to fetch logs');
+    return [];
+  }
 };
 
 const fetchTasks = async () => {
   if (!taskTable) return [];
-  const res = await fetch(`${API_BASE}/tasks`);
-  const data = await res.json();
-  const tbody = taskTable.querySelector('tbody');
-  tbody.innerHTML = '';
-  data.forEach(task => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${task.name}</td><td><button class="btn edit-task-btn">Edit</button> <button class="btn delete-task-btn">Delete</button></td>`;
-    tbody.appendChild(tr);
-  });
-  return data;
+  try {
+    const res = await fetch(`${API_BASE}/tasks`);
+    if (!res.ok) {
+      showToast ? showToast('Failed to fetch tasks') : console.error('Failed to fetch tasks');
+      return [];
+    }
+    const data = await res.json();
+    const tbody = taskTable.querySelector('tbody');
+    tbody.innerHTML = '';
+    data.forEach(task => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${task.name}</td><td><button class="btn edit-task-btn">Edit</button> <button class="btn delete-task-btn">Delete</button></td>`;
+      tbody.appendChild(tr);
+    });
+    return data;
+  } catch (err) {
+    console.error('Failed to fetch tasks', err);
+    showToast && showToast('Failed to fetch tasks');
+    return [];
+  }
 };
 
 const fetchStatus = async () => {
   if (!statusTable) return [];
-  const res = await fetch(`${API_BASE}/status`);
-  const data = await res.json();
-  const tbody = statusTable.querySelector('tbody');
-  tbody.innerHTML = '';
-  data.forEach(svc => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${svc.service}</td><td><span class="label ${svc.status === 'Operational' ? 'success' : 'danger'}">${svc.status}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  return data;
+  try {
+    const res = await fetch(`${API_BASE}/status`);
+    if (!res.ok) {
+      showToast ? showToast('Failed to fetch status') : console.error('Failed to fetch status');
+      return [];
+    }
+    const data = await res.json();
+    const tbody = statusTable.querySelector('tbody');
+    tbody.innerHTML = '';
+    data.forEach(svc => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${svc.service}</td><td><span class="label ${svc.status === 'Operational' ? 'success' : 'danger'}">${svc.status}</span></td>`;
+      tbody.appendChild(tr);
+    });
+    return data;
+  } catch (err) {
+    console.error('Failed to fetch status', err);
+    showToast && showToast('Failed to fetch status');
+    return [];
+  }
 };
 function updateUserMetrics() {
   if (!userTable || !userCountEl) return;
