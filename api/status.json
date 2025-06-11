@@ -1,5 +1,7 @@
 [
   {"service": "API", "status": "Operational"},
   {"service": "Database", "status": "Maintenance"},
-  {"service": "Website", "status": "Operational"}
+  {"service": "Website", "status": "Operational"},
+  {"service": "Auth", "status": "Operational"},
+  {"service": "Storage", "status": "Degraded"}
 ]

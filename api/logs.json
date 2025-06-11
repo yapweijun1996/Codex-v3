@@ -1,5 +1,17 @@
 [
+  {"time": "2024-05-01", "user": "Admin", "action": "System start"},
+  {"time": "2024-05-02", "user": "Bob", "action": "Password change"},
+  {"time": "2024-05-03", "user": "Charlie", "action": "Create report"},
+  {"time": "2024-05-04", "user": "Dana", "action": "Delete file"},
+  {"time": "2024-05-05", "user": "Eve", "action": "Login"},
   {"time": "2024-05-06", "user": "Alice", "action": "Login"},
   {"time": "2024-05-07", "user": "Bob", "action": "Upload"},
-  {"time": "2024-05-08", "user": "Charlie", "action": "Logout"}
+  {"time": "2024-05-08", "user": "Charlie", "action": "Logout"},
+  {"time": "2024-05-09", "user": "Frank", "action": "Update settings"},
+  {"time": "2024-05-10", "user": "Grace", "action": "Download data"},
+  {"time": "2024-05-11", "user": "Heidi", "action": "Login"},
+  {"time": "2024-05-12", "user": "Ivan", "action": "Logout"},
+  {"time": "2024-05-13", "user": "Judy", "action": "Upload"},
+  {"time": "2024-05-14", "user": "Kyle", "action": "Login"},
+  {"time": "2024-05-15", "user": "Laura", "action": "Update profile"}
 ]
