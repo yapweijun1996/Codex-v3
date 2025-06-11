@@ -369,6 +369,7 @@ function initTasks() {
 function initCalendar() {
   if (!calendarTable) return;
   let current = new Date();
+  let events = [];
   const tbody = calendarTable.querySelector('tbody');
   const render = () => {
     const year = current.getFullYear();
@@ -380,14 +381,34 @@ function initCalendar() {
     for (let i = 0; i < first; i++) html += '<td></td>';
     for (let d = 1; d <= days; d++) {
       if ((first + d - 1) % 7 === 0 && d !== 1) html += '</tr><tr>';
-      html += `<td>${d}</td>`;
+      const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const evt = events.find(e => e.date === dateStr);
+      const cls = evt ? ' class="event-day" data-title="' + evt.title + '"' : '';
+      html += `<td${cls}>${d}</td>`;
     }
     html += '</tr>';
     tbody.innerHTML = html;
+    tbody.querySelectorAll('.event-day').forEach(td => {
+      td.addEventListener('click', () => {
+        const title = td.getAttribute('data-title');
+        const modalHtml = `<h3 id="event-title">${title}</h3><div class="modal-actions"><button id="close-event" class="btn">Close</button></div>`;
+        openModal(modalHtml, 'event-title');
+        document.getElementById('close-event').addEventListener('click', closeModal);
+      });
+    });
+  };
+  const loadEvents = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/events`);
+      if (res.ok) events = await res.json();
+    } catch (err) {
+      console.error('Failed to fetch events', err);
+    }
+    render();
   };
   if (calendarPrev) calendarPrev.addEventListener('click', () => { current.setMonth(current.getMonth() - 1); render(); });
   if (calendarNext) calendarNext.addEventListener('click', () => { current.setMonth(current.getMonth() + 1); render(); });
-  render();
+  loadEvents();
 }
 
 sidebar.querySelectorAll('a').forEach((link) => {
@@ -475,11 +496,23 @@ if (systemHealthEl) {
 if (applyBtn) applyBtn.addEventListener('click', () => updateAnalyticsCharts(startInput, endInput));
 applyTheme();
 
-const notifBadge = document.getElementById('notification-badge');
-function fetchNotifications() {
-  return new Promise((resolve) => {
-    setTimeout(() => { resolve(['Server restarted', 'New user', 'Backup complete']); }, 500);
+const notificationsList = document.getElementById('notifications-list');
+if (notificationsList) {
+  fetchNotifications().then(list => {
+    notificationsList.innerHTML = list.map(n => `<li>${n}</li>`).join('');
   });
+}
+
+const notifBadge = document.getElementById('notification-badge');
+async function fetchNotifications() {
+  try {
+    const res = await fetch(`${API_BASE}/notifications`);
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (err) {
+    console.error('Failed to fetch notifications', err);
+    return [];
+  }
 }
 function updateNotificationBadge() {
   if (!notifBadge) return;
