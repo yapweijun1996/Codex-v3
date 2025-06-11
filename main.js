@@ -30,6 +30,8 @@ const userCountEl = document.getElementById('user-count');
 const usersChartCanvas = document.getElementById('usersChart');
 const activityChartCanvas = document.getElementById('activityChart');
 const statusTable = document.getElementById("status-table");
+const taskCountEl = document.getElementById('task-count');
+const systemHealthEl = document.getElementById('system-health');
 
 export function showLoader() { if (pageLoader) pageLoader.classList.add('visible'); }
 export function hideLoader() { if (pageLoader) pageLoader.classList.remove('visible'); }
@@ -207,6 +209,17 @@ function updateUserMetrics() {
   const active = rows.filter(r => r.querySelector('td:nth-child(2) .label')?.textContent.trim() === 'Active').length;
   userCountEl.textContent = total;
   updateDashboardUserChart(active, total - active);
+}
+
+function updateTaskMetric(count) {
+  if (taskCountEl) taskCountEl.textContent = count;
+}
+
+function updateSystemHealthMetric(list) {
+  if (!systemHealthEl) return;
+  const operational = list.filter(s => s.status === 'Operational').length;
+  const percent = list.length ? Math.round((operational / list.length) * 100) : 0;
+  systemHealthEl.textContent = `${percent}%`;
 }
 
 function initTable() {
@@ -453,6 +466,12 @@ const endInput = document.getElementById('end-date');
 const applyBtn = document.getElementById('apply-range');
 initAnalyticsCharts(visitorsCanvas, sourceCanvas);
 initDashboardCharts(usersChartCanvas, activityChartCanvas);
+if (taskCountEl) {
+  fetch(`${API_BASE}/tasks`).then(res => res.json()).then(list => updateTaskMetric(list.length));
+}
+if (systemHealthEl) {
+  fetch(`${API_BASE}/status`).then(res => res.json()).then(updateSystemHealthMetric);
+}
 if (applyBtn) applyBtn.addEventListener('click', () => updateAnalyticsCharts(startInput, endInput));
 applyTheme();
 
