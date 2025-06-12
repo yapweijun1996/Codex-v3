@@ -17,6 +17,8 @@ const ASSETS = [
   './main.min.js',
   './header.js',
   './header.min.js',
+  './footer.js',
+  './footer.min.js',
   './sidebar.min.js',
   'https://cdn.jsdelivr.net/npm/chart.js'
   , './api/users.json'

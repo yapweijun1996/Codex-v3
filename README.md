@@ -18,6 +18,13 @@ Include the script before your page content and call the function:
 </script>
 ```
 
+Include the footer script similarly and call `buildFooter()` to append a footer:
+
+```html
+<script src="footer.min.js"></script>
+<script>buildFooter('v0.1');</script>
+```
+
 The sidebar toggle appears on the right so it is reachable for right-handed mobile use. The header also includes a skip link for accessibility and optional theme toggle support.
 ## Sidebar Component
 
