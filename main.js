@@ -109,7 +109,7 @@ const API_BASE = "./api";
 const fetchUsers = async () => {
   if (!userTable) return [];
   try {
-    const res = await fetch(`${API_BASE}/users`);
+    const res = await fetch(`${API_BASE}/users.json`);
     if (!res.ok) {
       showToast ? showToast('Failed to fetch users') : console.error('Failed to fetch users');
       return [];
@@ -134,7 +134,7 @@ const fetchUsers = async () => {
 const fetchLogs = async () => {
   if (!userTable) return [];
   try {
-    const res = await fetch(`${API_BASE}/logs`);
+    const res = await fetch(`${API_BASE}/logs.json`);
     if (!res.ok) {
       showToast ? showToast('Failed to fetch logs') : console.error('Failed to fetch logs');
       return [];
@@ -158,7 +158,7 @@ const fetchLogs = async () => {
 const fetchTasks = async () => {
   if (!taskTable) return [];
   try {
-    const res = await fetch(`${API_BASE}/tasks`);
+    const res = await fetch(`${API_BASE}/tasks.json`);
     if (!res.ok) {
       showToast ? showToast('Failed to fetch tasks') : console.error('Failed to fetch tasks');
       return [];
@@ -182,7 +182,7 @@ const fetchTasks = async () => {
 const fetchStatus = async () => {
   if (!statusTable) return [];
   try {
-    const res = await fetch(`${API_BASE}/status`);
+    const res = await fetch(`${API_BASE}/status.json`);
     if (!res.ok) {
       showToast ? showToast('Failed to fetch status') : console.error('Failed to fetch status');
       return [];
@@ -399,7 +399,7 @@ function initCalendar() {
   };
   const loadEvents = async () => {
     try {
-      const res = await fetch(`${API_BASE}/events`);
+      const res = await fetch(`${API_BASE}/events.json`);
       if (res.ok) events = await res.json();
     } catch (err) {
       console.error('Failed to fetch events', err);
@@ -488,10 +488,10 @@ const applyBtn = document.getElementById('apply-range');
 initAnalyticsCharts(visitorsCanvas, sourceCanvas);
 initDashboardCharts(usersChartCanvas, activityChartCanvas);
 if (taskCountEl) {
-  fetch(`${API_BASE}/tasks`).then(res => res.json()).then(list => updateTaskMetric(list.length));
+  fetch(`${API_BASE}/tasks.json`).then(res => res.json()).then(list => updateTaskMetric(list.length));
 }
 if (systemHealthEl) {
-  fetch(`${API_BASE}/status`).then(res => res.json()).then(updateSystemHealthMetric);
+  fetch(`${API_BASE}/status.json`).then(res => res.json()).then(updateSystemHealthMetric);
 }
 if (applyBtn) applyBtn.addEventListener('click', () => updateAnalyticsCharts(startInput, endInput));
 applyTheme();
@@ -506,7 +506,7 @@ if (notificationsList) {
 const notifBadge = document.getElementById('notification-badge');
 async function fetchNotifications() {
   try {
-    const res = await fetch(`${API_BASE}/notifications`);
+    const res = await fetch(`${API_BASE}/notifications.json`);
     if (!res.ok) return [];
     return await res.json();
   } catch (err) {
