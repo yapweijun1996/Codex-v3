@@ -522,6 +522,10 @@ html.light .table__filter-input {
 .calendar-table td.event-day:hover {
   background: var(--accent-color);
 }
+.calendar-table td.event-day:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
 
 /* Pagination controls for tables */
 .table__pagination {
