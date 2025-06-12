@@ -3,5 +3,10 @@
   "New policy update available",
   "Server restarted",
   "Backup completed successfully",
-  "New user registered"
+  "New user registered",
+  "Database migration at 3PM",
+  "Password expires soon",
+  "Update your profile information",
+  "Maintenance window tomorrow",
+  "New comment on report"
 ]

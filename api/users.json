@@ -8,5 +8,9 @@
   {"name": "Grace", "status": "Active"},
   {"name": "Heidi", "status": "Suspended"},
   {"name": "Ivan", "status": "Active"},
-  {"name": "Judy", "status": "Active"}
+  {"name": "Judy", "status": "Active"},
+  {"name": "Kevin", "status": "Active"},
+  {"name": "Laura", "status": "Suspended"},
+  {"name": "Mallory", "status": "Active"},
+  {"name": "Niaj", "status": "Active"}
 ]

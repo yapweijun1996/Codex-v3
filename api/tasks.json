@@ -10,5 +10,8 @@
   {"name": "Deploy update"},
   {"name": "Test new feature"},
   {"name": "Resolve ticket"},
-  {"name": "Backup database"}
+  {"name": "Backup database"},
+  {"name": "Optimize queries"},
+  {"name": "Design mockups"},
+  {"name": "Conduct training"}
 ]
