@@ -386,8 +386,11 @@ html.light .table__filter-input {
 
 @media (min-width: 600px) {
   .dashboard-grid {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
     align-items: start;
+  }
+  .dashboard-grid .table__filter-input {
+    max-width: 250px;
   }
 }
 
