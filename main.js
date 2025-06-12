@@ -417,8 +417,16 @@ function initCalendar() {
     }
     render();
   };
-  if (calendarPrev) calendarPrev.addEventListener('click', () => { current.setMonth(current.getMonth() - 1); render(); });
-  if (calendarNext) calendarNext.addEventListener('click', () => { current.setMonth(current.getMonth() + 1); render(); });
+  if (calendarPrev) calendarPrev.addEventListener('click', () => {
+    current.setDate(1);
+    current.setMonth(current.getMonth() - 1);
+    render();
+  });
+  if (calendarNext) calendarNext.addEventListener('click', () => {
+    current.setDate(1);
+    current.setMonth(current.getMonth() + 1);
+    render();
+  });
   loadEvents();
 }
 
