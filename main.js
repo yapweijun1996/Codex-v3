@@ -202,6 +202,17 @@ const fetchStatus = async () => {
     return [];
   }
 };
+
+const fetchProfile = async () => {
+  try {
+    const res = await fetch(`${API_BASE}/profile.json`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (err) {
+    console.error('Failed to fetch profile', err);
+    return null;
+  }
+};
 function updateUserMetrics() {
   if (!userTable || !userCountEl) return;
   const rows = Array.from(userTable.querySelectorAll('tbody tr'));
@@ -475,7 +486,27 @@ if (profileForm) {
     const confirmBtn = document.getElementById('confirm-profile');
     const cancelBtn = document.getElementById('cancel-profile');
     confirmBtn.addEventListener('click', () => { closeModal(); showToast('Profile updated'); });
-    cancelBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  });
+}
+
+const profileCard = document.querySelector('.profile-card');
+if (profileCard) {
+  fetchProfile().then(data => {
+    if (!data) return;
+    const { avatar, name, title, location, email, phone } = data;
+    const avatarEl = profileCard.querySelector('.profile-avatar');
+    const nameEl = profileCard.querySelector('.profile-name');
+    const titleEl = profileCard.querySelector('.profile-title');
+    const locationEl = profileCard.querySelector('.profile-location');
+    const emailEl = profileCard.querySelector('.profile-email');
+    const phoneEl = profileCard.querySelector('.profile-phone');
+    if (avatarEl) avatarEl.src = avatar;
+    if (nameEl) nameEl.textContent = name;
+    if (titleEl) titleEl.textContent = title;
+    if (locationEl) locationEl.textContent = location;
+    if (emailEl) emailEl.textContent = email;
+    if (phoneEl) phoneEl.textContent = phone;
   });
 }
 

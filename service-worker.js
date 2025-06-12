@@ -27,6 +27,7 @@ const ASSETS = [
   , './api/status.json'
   , './api/events.json'
   , './api/notifications.json'
+  , './api/profile.json'
 ];
 
 self.addEventListener('install', event => {
