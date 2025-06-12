@@ -43,3 +43,4 @@ Core colors are defined with CSS variables so both the dark and light themes sta
 ### Profile Page
 
 `profile.html` contains personal account controls. The form allows uploading a new avatar and changing the password. Submitting the form triggers a modal confirmation built with `openModal` in `main.min.js`.
+The page now loads data from `api/profile.json` to show a profile card with your basic details.
