@@ -394,17 +394,26 @@ function initCalendar() {
       if ((first + d - 1) % 7 === 0 && d !== 1) html += '</tr><tr>';
       const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const evt = events.find(e => e.date === dateStr);
-      const cls = evt ? ' class="event-day" data-title="' + evt.title + '"' : '';
-      html += `<td${cls}>${d}</td>`;
+      const attrs = evt
+        ? ` class="event-day" data-title="${evt.title}" role="button" tabindex="0" aria-label="${evt.title}"`
+        : '';
+      html += `<td${attrs}>${d}</td>`;
     }
     html += '</tr>';
     tbody.innerHTML = html;
     tbody.querySelectorAll('.event-day').forEach(td => {
-      td.addEventListener('click', () => {
+      const open = () => {
         const title = td.getAttribute('data-title');
         const modalHtml = `<h3 id="event-title">${title}</h3><div class="modal-actions"><button id="close-event" class="btn">Close</button></div>`;
         openModal(modalHtml, 'event-title');
         document.getElementById('close-event').addEventListener('click', closeModal);
+      };
+      td.addEventListener('click', open);
+      td.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
       });
     });
   };
