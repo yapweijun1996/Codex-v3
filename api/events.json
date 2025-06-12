@@ -4,4 +4,10 @@
   {"date": "2025-06-12", "title": "Release v1.0"},
   {"date": "2025-06-20", "title": "Board meeting"},
   {"date": "2025-06-25", "title": "Hackathon"}
+  ,{"date": "2025-07-01", "title": "Quarterly review"}
+  ,{"date": "2025-07-10", "title": "Security audit"}
+  ,{"date": "2025-07-15", "title": "Client workshop"}
+  ,{"date": "2025-07-22", "title": "Product demo"}
+  ,{"date": "2025-07-30", "title": "Company picnic"}
+  ,{"date": "2025-08-05", "title": "Budget planning"}
 ]

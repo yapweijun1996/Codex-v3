@@ -3,5 +3,11 @@
   {"service": "Database", "status": "Maintenance"},
   {"service": "Website", "status": "Operational"},
   {"service": "Auth", "status": "Operational"},
-  {"service": "Storage", "status": "Degraded"}
+  {"service": "Storage", "status": "Degraded"},
+  {"service": "Cache", "status": "Operational"},
+  {"service": "Email", "status": "Operational"},
+  {"service": "Search", "status": "Degraded"},
+  {"service": "Analytics", "status": "Operational"},
+  {"service": "Payments", "status": "Maintenance"},
+  {"service": "Messaging", "status": "Operational"}
 ]
